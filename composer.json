@@ -1,0 +1,14 @@
+{
+    "name": "stratedge/wye",
+    "description": "A library for mocking native PDO connections and query results",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jarret Byrne",
+            "email": "jarret@solvomedia.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

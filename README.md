@@ -1,2 +1,94 @@
-# wye
-A library to mock the PDO class for unit testing
+# Wye
+
+A library for mocking native PDO connections and query results
+
+## About
+
+"[In firefighting a] hose appliance used for splitting one line into two discharges. Often a gated wye is used to allow and disallow water flow through the two separate discharges." - [https://en.wikipedia.org/wiki/Glossary\_of\_firefighting\_equipment#Wye]()
+
+Wye is designed to mock PHP's PDO class in order to abstract away the need for a database in unit testing. Individual query results can be defined and controlled, and all queries that are executed are logged for inspection or use in assertions.
+
+## Installation
+
+Wye can be installed using Composer:
+
+```sh
+composer require stratedge/wye:dev-master
+```
+
+## Usage
+
+### Replacing Core PDO
+
+Since Wye's PDO class extends from the core PDO class, simply inject Wye's PDO class in place of the core PDO class. A new `Stratedge\Wye\PDO\PDO` class can be generated with `Stratedge\Wye\Wye::makePDO()`.
+
+```php
+<?php
+
+use Stratedge\Wye\Wye;
+
+$pdo = Wye::makePDO();
+
+//You can now inject $pdo wherever you would normally inject the core PDO class in your framework
+```
+
+### Defining Results
+
+Since Wye does not connect to a database, you will need to define what results Wye should return every time a query is executed.
+
+```php
+$result = Wye::makeResult(); //$result is an instance of \Stratedge\Wye\Result
+```
+
+#### Adding Rows 
+
+Out of the box, a `Result` object will accept rows defined as associatiave arrays of column-name/value pairs.
+
+> #### A Note on Constructing Row Data:
+> You should define your return data in its raw state - meaning as the data source would return it.  Wye will use the fetch style that your code defines to format the data on your behalf so that if you change your fetch style in the future there should be no need to revisit your test data.
+
+```php
+//Define a single row
+$result->addRow(["id" => 1, "apparatus" => "Engine 1"]);
+
+//Define multile rows
+$result->addRows(
+	["id" => 2, "apparatus" => "Engine 2"],
+	["id" => 3, "apparatus" => "Ladder 5"]
+);
+
+//Define multiple rows by chaining
+$result->addRow(["id" => 4, "apparatus" => "Rescue 1")
+	->addRow(["id" => 5, "apparatus" => "Squad 2")
+	->addRow(["id" => 6, "apparatus" => "Command Car 1");
+```
+
+#### Adding Rows When Column Names Are Predefined
+
+For the same of ease, readibility, and brevity, you can define the columns of a `Result` object once, and then each row can be defined by a plain array of values, or as individual parameters to the `addRow` method.
+
+> #### A Note on Constructing Row Data:
+> You should define your return data in its raw state - meaning as the data source would return it.  Wye will use the fetch style that your code defines to format the data on your behalf so that if you change your fetch style in the future there should be no need to revisit your test data.
+
+```php
+//There are two ways to define the columns for a result:
+$result->columns(["id", "apparatus"]); //As an array of values
+$result->columns("id", "apparatus"); //As individual parameters
+
+$result->addRow([7, "Engine 8"]); //Row defined by plain array
+	->addRow(8, "Ladder 2"); //Row defined by individual parameters
+	->addRows([
+		[9, "Rescue 2"],
+		[10, "Ambulance 1"]
+	]);
+```
+
+#### Attaching Results
+
+Once the result is built it must be attached to the Wye so it can be served when a query is executed. You can attach as many `Result` objects to the Wye as you wish, and the same `Result` object can be attached any number of times. Results are used in the order that they are attached.
+
+```php
+//There are two ways to attach the Result to the Wye:
+Wye::addResult($result); //Pass the result to the Wye
+$result->attach(); //Tell the result to attach itself (convenient for chaining)
+```

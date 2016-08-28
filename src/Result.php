@@ -162,5 +162,6 @@ class Result
     public function attach()
     {
         $this->wye()->addResult($this);
+        return $this;
     }
 }

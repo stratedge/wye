@@ -248,7 +248,7 @@ class Wye
         static::$num_queries = $num_queries;
     }
 
-    public function resetNumQueries()
+    public static function resetNumQueries()
     {
         static::setNumQueries(0);
     }
@@ -256,6 +256,8 @@ class Wye
     public static function incrementNumQueries()
     {
         $num_queries = static::numQueries();
-        static::numQueries($num_queries++);
+        $num_queries++;
+
+        static::numQueries($num_queries);
     }
 }

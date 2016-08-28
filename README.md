@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stratedge/wye.svg?branch=master)](https://travis-ci.org/stratedge/wye)
+
 # Wye
 
 A library for mocking native PDO connections and query results

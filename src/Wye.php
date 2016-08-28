@@ -159,7 +159,6 @@ class Wye
         static::setStatements([]);
     }
 
-
     public static function addStatement(PDOStatement $statement)
     {
         //Add statement
@@ -168,6 +167,13 @@ class Wye
 
         //Store statements
         static::statements($statements);
+    }
+
+    public static function getStatementAtIndex($index = 0)
+    {
+        $statements = static::statements();
+
+        return isset($statements[$index]) ? $statements[$index] : null;
     }
 
 

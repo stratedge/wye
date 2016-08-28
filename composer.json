@@ -10,5 +10,15 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "raveren/kint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stratedge\\Wye\\": "src/",
+            "Tests\\": "tests/"
+        }
+    }
 }

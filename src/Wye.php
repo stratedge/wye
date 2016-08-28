@@ -73,7 +73,7 @@ class Wye
     }
 
 
-    public static function makeRow($data)
+    public static function makeRow(array $data)
     {
         $row = new Row(new static, $data);
         return $row;

@@ -65,7 +65,7 @@ $result->addRow(["id" => 4, "apparatus" => "Rescue 1")
 
 #### Adding Rows When Column Names Are Predefined
 
-For the same of ease, readibility, and brevity, you can define the columns of a `Result` object once, and then each row can be defined by a plain array of values, or as individual parameters to the `addRow` method.
+For the sake of ease, readibility, and brevity, you can define the columns of a `Result` object once, and then each row can be defined by a plain array of values, or as individual parameters to the `addRow` method.
 
 > #### A Note on Constructing Row Data:
 > You should define your return data in its raw state - meaning as the data source would return it.  Wye will use the fetch style that your code defines to format the data on your behalf so that if you change your fetch style in the future there should be no need to revisit your test data.
@@ -91,4 +91,42 @@ Once the result is built it must be attached to the Wye so it can be served when
 //There are two ways to attach the Result to the Wye:
 Wye::addResult($result); //Pass the result to the Wye
 $result->attach(); //Tell the result to attach itself (convenient for chaining)
+```
+
+When a query is executed the corresponding PDOStatement will receive the data from the `Result` object that next in line to be served.
+
+### Resetting Wye
+
+When unit testing, each test should start with a clean slate. As such, Wye includes a `reset` to cleanup the data for the next test:
+
+```php
+use Stratedge\Wye\Wye;
+
+Wye::reset();
+```
+
+### Getting Query Execution Data
+
+#### Number of Queries Run
+
+```php
+use Stratedge\Wye\Wye;
+
+Wye::numQueries();
+```
+
+#### All Statements Executed
+
+```php
+use Stratedge\Wye\Wye;
+
+Wye::statements() //Returns an array of \Stratedge\Wye\PDO\PDOStatement objects
+```
+
+#### All Results Defined
+
+```php
+use Stratedge\Wye\Wye;
+
+Wye::results() //Returns an array of \Stratedge\Wye\Result objects
 ```

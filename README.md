@@ -107,26 +107,36 @@ Wye::reset();
 
 ### Getting Query Execution Data
 
-#### Number of Queries Run
+#### Get Number of Queries Run
 
 ```php
 use Stratedge\Wye\Wye;
 
-Wye::numQueries();
+$num_queries = Wye::numQueries();
 ```
 
-#### All Statements Executed
+#### Get All Statements Executed
 
 ```php
 use Stratedge\Wye\Wye;
 
-Wye::statements() //Returns an array of \Stratedge\Wye\PDO\PDOStatement objects
+$statements = Wye::statements() //Returns an array of \Stratedge\Wye\PDO\PDOStatement objects
 ```
 
-#### All Results Defined
+#### Get Statement Executed By Index
+
+If you wish to inspect a single `PDOStatement` run at a particular point in the order of queries executed, you may use the `getStatementAtIndex` method;
 
 ```php
 use Stratedge\Wye\Wye;
 
-Wye::results() //Returns an array of \Stratedge\Wye\Result objects
+$statement = Wye::getStatementAtIndex(3); //Returns the 4th query executed (0-indexed)
+```
+
+#### Get All Attached Results
+
+```php
+use Stratedge\Wye\Wye;
+
+$results = Wye::results() //Returns an array of \Stratedge\Wye\Result objects
 ```

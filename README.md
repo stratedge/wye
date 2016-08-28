@@ -13,6 +13,7 @@ Wye is designed to mock PHP's PDO class in order to abstract away the need for a
 Wye can be installed using Composer:
 
 ```sh
+composer config repositories.wye vcs https://github.com/stratedge/wye.git
 composer require stratedge/wye:dev-master
 ```
 

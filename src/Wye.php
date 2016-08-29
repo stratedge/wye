@@ -39,6 +39,13 @@ class Wye
     }
 
 
+    /**
+     * Creates and returns a new Stratedge\Wye\PDO\PDOStatement object
+     *
+     * @param  string $statement The SQL statement that would be executed
+     * @param  array  $options   An array of options for statement execution
+     * @return PDOStatement
+     */
     public static function makeStatement($statement, $options)
     {
         $statement = new PDOStatement(new static, $statement, $options);
@@ -46,6 +53,11 @@ class Wye
     }
 
 
+    /**
+     * Creates and returns a new Stratedge\Wye\PDO\PDO object
+     *
+     * @return PDO
+     */
     public static function makePDO()
     {
         $pdo = new PDO(new static);
@@ -53,6 +65,11 @@ class Wye
     }
 
 
+    /**
+     * Creates and a returns a new Stratedge\Wye\Result object
+     *
+     * @return Result
+     */
     public static function makeResult()
     {
         $result = new Result(new static);
@@ -60,6 +77,12 @@ class Wye
     }
 
 
+    /**
+     * Creates and returns a new Stratedge\Wye\Row object
+     *
+     * @param  array  $data Associative array of row data
+     * @return Row
+     */
     public static function makeRow(array $data = [])
     {
         $row = new Row(new static, $data);
@@ -67,6 +90,13 @@ class Wye
     }
 
 
+    /**
+     * Records a simulation of a query execution
+     *
+     * @param  PDOStatement $statement
+     * @param  array        $params
+     * @return void
+     */
     public static function executeStatement(
         PDOStatement $statement,
         array $params = []

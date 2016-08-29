@@ -38,6 +38,9 @@ class Wye
     }
 
 
+    /**
+     * @deprecated
+     */
     public static function boot()
     {
         static::reset();

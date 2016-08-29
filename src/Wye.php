@@ -10,11 +10,6 @@ use Stratedge\Wye\Row;
 class Wye
 {
     /**
-     * @var boolean
-     */
-    protected static $booted = false;
-
-    /**
      * @var array
      */
     protected static $statements = [];
@@ -30,23 +25,8 @@ class Wye
     protected static $num_queries = 0;
 
 
-    public function __construct()
-    {
-        if ($this->isBooted()) {
-            $this->boot();
-        }
-    }
-
-
     /**
-     * @deprecated
      */
-    public static function boot()
-    {
-        static::reset();
-    }
-
-
     public static function reset()
     {
         static::resetStatements();
@@ -100,36 +80,6 @@ class Wye
 
         //Increment number of queries run
         static::incrementNumQueries();
-    }
-
-
-
-    //**************************************************************************
-    // BOOTED
-    //**************************************************************************
-
-    public static function booted($booted = null)
-    {
-        if (is_null($is_booted)) {
-            return static::getBooted();
-        } else {
-            return static::setBooted($booted);
-        }
-    }
-
-    public static function getBooted()
-    {
-        return static::$booted;
-    }
-
-    public static function setBooted($booted)
-    {
-        static::$booted = (bool) $booted;
-    }
-
-    public static function isBooted()
-    {
-        return static::getBooted() === true;
     }
 
 

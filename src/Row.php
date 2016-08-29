@@ -30,7 +30,24 @@ class Row
 
     public function format($how, $class_name = "stdClass", $ctor_args = [])
     {
+        /**
+         * @todo:
+         *     - Implement PDO::FETCH_CLASSTYPE flag on PDO::FETCH_CLASS
+         *     - Implement PDO::FETCH_PROPS_LATE flag on PDO::FETCH_CLASS
+         *     - Implement PDO::FETCH_ASSOC
+         *     - Implement PDO::FETCH_BOTH
+         *     - Implement PDO::FETCH_BOUND
+         *     - Implement PDO::FETCH_INTO
+         *     - Implement PDO::FETCH_LAZY
+         *     - Implement PDO::FETCH_NAMED
+         *     - Implement PDO::FETCH_NUM
+         *     - Implement PDO::FETCH_OBJ
+         */
+
         switch ($how) {
+            case PDO::FETCH_ASSOC:
+                $data = $this->formatAssoc();
+                break;
             case PDO::FETCH_CLASS:
                 $data = $this->formatClass($class_name, $ctor_args);
                 break;
@@ -39,6 +56,12 @@ class Row
         }
 
         return $data;
+    }
+
+
+    protected function formatAssoc()
+    {
+        return $this->data();
     }
 
 

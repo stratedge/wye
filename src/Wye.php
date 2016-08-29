@@ -26,6 +26,10 @@ class Wye
 
 
     /**
+     * Resets all the static properties so that a new test can be run with fresh
+     * information
+     *
+     * @return void
      */
     public static function reset()
     {

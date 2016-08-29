@@ -141,3 +141,76 @@ use Stratedge\Wye\Wye;
 
 $results = Wye::results() //Returns an array of \Stratedge\Wye\Result objects
 ```
+
+## Todo & Roadmap
+
+Wye is far from finished. _Repeat: far from finished_. It works for a few cases presently but needs to handle all of them, plus have a robust suite of unit tests before it can be of greatest use.
+
+Below are the areas needing work. If you'd like to help, pull requests are accepted!
+
+### Stratedge\Wye\Wye
+
+- Remove boot functionality
+- Implement a collection for storing statements
+- Implement a collection for storing results
+- Implement recording when transactions are used
+- Implement a system for throwing errors/exceptions
+
+### Stratedge\Wye\PDO\PDO
+
+- Implement the `beginTransaction` method
+- Implement the `commit` method
+- Implement the `errorCode` method
+- Implement the `errorInfo` method
+- Implement the `exec` method
+- Implement the `getAttribute` method
+- Implement the `getAvailableDrivers` method
+- Implement the `inTransaction` method
+- Implement the `lastInsertId` method
+- Implement the `query` method
+- Implement the `quote` method
+- Implement the `rollBack` method
+- Implement the `setAttribute` method
+
+### Stratedge\Wye\PDO\PDOStatement
+
+- Implement `bindColumn` method
+- Implement `bindParam` method
+- Implement `bindValue` method
+- Implement `closeCursor` method
+- Implement `columnCount` method
+- Implement `debugDumpParams` method
+- Implement `errorCode` method
+- Implement `errorInfo` method
+- Implement `execute` method
+- Implement `fetch` method
+- Implement `fetchColumn` method
+- Implement `fetchObject` method
+- Implement `getAttribute` method
+- Implement `getColumnMeta` method
+- Implement `nextRowset` method
+- Implement `rowCount` method
+- Implement `setAttribute` method
+- Implement `setFetchMode` method
+
+### Stratedge\Wye\Result
+
+- Implement `fetch` method
+- Implement `fetchColumn` method
+- Implement `fetchObject` method
+- Implement `rowCount` method
+
+### Stratedge\Wye\Row
+
+- Implement `PDO::FETCH_CLASSTYPE` flag on `PDO::FETCH_CLASS`
+- Implement `PDO::FETCH_PROPS_LATE` flag on `PDO::FETCH_CLASS`
+- Implement `PDO::FETCH_BOUND`
+- Implement `PDO::FETCH_INTO`
+- Implement `PDO::FETCH_LAZY`
+- Implement `PDO::FETCH_NAMED`
+- Implement `PDO::FETCH_NUM`
+- Implement `PDO::FETCH_OBJ`
+
+## Acknowledgements
+
+Wye is built on top of an idea I first saw implemented by my friend/colleague [Josh](https://github.com/phpcodecrafting).

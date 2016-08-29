@@ -28,7 +28,7 @@ class Row
     }
 
 
-    public function format($how, $class_name, $ctor_args)
+    public function format($how, $class_name = "stdClass", $ctor_args = [])
     {
         switch ($how) {
             case PDO::FETCH_CLASS:

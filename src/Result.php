@@ -8,6 +8,13 @@ use Stratedge\Wye\Row;
 use Stratedge\Wye\Traits\UsesWye;
 use Stratedge\Wye\Wye;
 
+/**
+ * @todo
+ *   - Implement `fetch` method
+ *   - Implement `fetchColumn` method
+ *   - Implement `fetchObject` method
+ *   - Implement `rowCount` method
+ */
 class Result
 {
     use UsesWye;
@@ -18,19 +25,30 @@ class Result
      */
     protected $columns = [];
 
-
     /**
      * @var array
      */
     protected $rows = [];
 
 
+    /**
+     * @param Wye $wye
+     */
     public function __construct(Wye $wye)
     {
         $this->wye($wye);
     }
 
 
+    /**
+     * Formats and returns all the available rows in the result according to the
+     * formatting parameters provided
+     *
+     * @param  integer $how        Integer value derived from PDO::FETCH_* constants
+     * @param  string  $class_name Name of class to instantiate when PDO::FETCH_CLASS is used
+     * @param  array   $ctor_args  Arguments to pass to constructor when PDO::FETCH_CLASS is used
+     * @return array
+     */
     public function fetchAll($how, $class_name, $ctor_args)
     {
         $result = [];
@@ -41,6 +59,7 @@ class Result
 
         return $result;
     }
+
 
 
     //**************************************************************************

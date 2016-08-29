@@ -34,8 +34,6 @@ class Row
          * @todo:
          *     - Implement PDO::FETCH_CLASSTYPE flag on PDO::FETCH_CLASS
          *     - Implement PDO::FETCH_PROPS_LATE flag on PDO::FETCH_CLASS
-         *     - Implement PDO::FETCH_ASSOC
-         *     - Implement PDO::FETCH_BOTH
          *     - Implement PDO::FETCH_BOUND
          *     - Implement PDO::FETCH_INTO
          *     - Implement PDO::FETCH_LAZY
@@ -47,6 +45,9 @@ class Row
         switch ($how) {
             case PDO::FETCH_ASSOC:
                 $data = $this->formatAssoc();
+                break;
+            case PDO::FETCH_BOTH:
+                $data = $this->formatBoth();
                 break;
             case PDO::FETCH_CLASS:
                 $data = $this->formatClass($class_name, $ctor_args);
@@ -62,6 +63,21 @@ class Row
     protected function formatAssoc()
     {
         return $this->data();
+    }
+
+
+    protected function formatBoth()
+    {
+        $data = [];
+        $index = 0;
+
+        foreach ($this->data() as $key => $value) {
+            $data[$key] = $value;
+            $data[$index] = $value;
+            $index++;
+        }
+
+        return $data;
     }
 
 

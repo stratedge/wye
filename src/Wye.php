@@ -368,7 +368,7 @@ class Wye
     // IN TRANSACTION
     //**************************************************************************
 
-    public static function inTransaction(bool $in_transaction = null)
+    public static function inTransaction($in_transaction = null)
     {
         if (is_null($in_transaction)) {
             return static::getInTransaction();
@@ -382,9 +382,9 @@ class Wye
         return static::$in_transaction;
     }
 
-    public static function setInTransaction(bool $in_transaction)
+    public static function setInTransaction($in_transaction)
     {
-        static::$in_transaction = $in_transaction;
+        static::$in_transaction = (bool) $in_transaction;
     }
 
     public static function resetInTransaction()

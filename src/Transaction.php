@@ -20,7 +20,7 @@ class Transaction
     protected $statements = [];
 
 
-    public function __construct(int $index = null)
+    public function __construct($index = null)
     {
         if (!is_null($index)) {
             $this->setIndex($index);
@@ -32,7 +32,7 @@ class Transaction
     // INDEX
     //**************************************************************************
 
-    public function index(int $index = null)
+    public function index($index = null)
     {
         if (is_null($index)) {
             return $this->getIndex();
@@ -46,7 +46,7 @@ class Transaction
         return $this->index;
     }
 
-    public function setIndex(int $index)
+    public function setIndex($index)
     {
         $this->index = (int) $index;
     }
@@ -57,7 +57,7 @@ class Transaction
     // COMMITTED
     //**************************************************************************
 
-    public function committed(bool $committed = null)
+    public function committed($committed = null)
     {
         if (is_null($committed)) {
             return $this->getCommitted();
@@ -71,7 +71,7 @@ class Transaction
         return $this->committed;
     }
 
-    public function setCommitted(bool $committed)
+    public function setCommitted($committed)
     {
         $this->committed = (bool) $committed;
     }

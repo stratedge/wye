@@ -109,6 +109,13 @@ class Wye
     }
 
 
+    public static function makeTransaction($index = null)
+    {
+        $transaction = new Transaction($index);
+        return $transaction;
+    }
+
+
     /**
      * Records a simulation of a query execution
      *

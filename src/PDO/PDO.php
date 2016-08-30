@@ -43,6 +43,19 @@ class PDO extends BasePDO
     //**************************************************************************
 
     /**
+     * Mimic for PDO::beginTransaction(). Records a new transaction on the Wye
+     *
+     * @return true
+     */
+    public function beginTransaction()
+    {
+        Wye::beginTransaction();
+
+        return true;
+    }
+
+
+    /**
      * Mimic for PDO::prepare(). Generates and returns a mock PDOStatement
      *
      * @param  string $statement

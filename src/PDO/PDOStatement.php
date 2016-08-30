@@ -6,6 +6,7 @@ use PDOStatement as BasePDOStatement;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
+use Stratedge\Wye\Transaction;
 use Stratedge\Wye\Wye;
 
 /**
@@ -57,6 +58,11 @@ class PDOStatement extends BasePDOStatement
      * @var array
      */
     protected $fetch_mode = [PDO::ATTR_DEFAULT_FETCH_MODE];
+
+    /**
+     * @var Transaction
+     */
+    protected $transaction;
 
 
     /**
@@ -258,5 +264,29 @@ class PDOStatement extends BasePDOStatement
     public function getFetchMode()
     {
         return $this->fetch_mode;
+    }
+
+
+    //**************************************************************************
+    // TRANSACTION
+    //**************************************************************************
+
+    public function transaction(Transaction $transaction = null)
+    {
+        if (is_null($transaction)) {
+            return $this->getTransaction();
+        } else {
+            return $this->setTransaction($transaction);
+        }
+    }
+
+    public function getTransaction()
+    {
+        return $this->transaction;
+    }
+
+    public function setTransaction(Transaction $transaction)
+    {
+        $this->transaction = $transaction;
     }
 }

@@ -1,0 +1,29 @@
+<?php
+
+namespace Tests\PDO\PDO;
+
+use Stratedge\Wye\PDO\PDOException;
+use Stratedge\Wye\Wye;
+use Tests\TestCase;
+
+class BeginTransactionTest extends TestCase
+{
+    public function testReturnsTrue()
+    {
+        $pdo = Wye::makePDO();
+
+        $this->assertTrue($pdo->beginTransaction());
+    }
+
+
+    public function testExceptionThrownWhenAlreadyInTransaction()
+    {
+        $this->setExpectedException(PDOException::class);
+
+        $pdo = Wye::makePDO();
+
+        $pdo->beginTransaction();
+
+        $pdo->beginTransaction();
+    }
+}

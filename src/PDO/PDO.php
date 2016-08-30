@@ -10,7 +10,6 @@ use Stratedge\Wye\Wye;
 
 /**
  * @todo
- *   - Implement the `beginTransaction` method
  *   - Implement the `commit` method
  *   - Implement the `errorCode` method
  *   - Implement the `errorInfo` method

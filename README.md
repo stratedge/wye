@@ -158,7 +158,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 
 ### Stratedge\Wye\PDO\PDO
 
-- Implement the `beginTransaction` method
+- ~~Implement the `beginTransaction` method~~
 - Implement the `commit` method
 - Implement the `errorCode` method
 - Implement the `errorInfo` method

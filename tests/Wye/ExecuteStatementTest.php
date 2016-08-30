@@ -76,4 +76,28 @@ class ExecuteStatementTest extends TestCase
             Wye::executeStatement($statement, []);
         }
     }
+
+
+    public function testTransactionPropertyNotSetWithoutTransaction()
+    {
+        $statement = Wye::makeStatement("test", []);
+
+        Wye::executeStatement($statement);
+
+        $this->assertAttributeSame(null, "transaction", $statement);
+    }
+
+
+    public function testTransactionPropertySetToCurrentTransaction()
+    {
+        $statement = Wye::makeStatement("test", []);
+
+        Wye::beginTransaction();
+
+        Wye::executeStatement($statement);
+
+        $transaction = Wye::currentTransaction();
+
+        $this->assertAttributeSame($transaction, "transaction", $statement);
+    }
 }

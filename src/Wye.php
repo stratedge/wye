@@ -2,6 +2,7 @@
 
 namespace Stratedge\Wye;
 
+use Exception;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
@@ -138,6 +139,11 @@ class Wye
 
         //Add the result to the statement
         $statement->result($result);
+
+        //If a transaction is open, add the statement to it
+        if (static::inTransaction()) {
+            static::currentTransaction()->addStatement($statement);
+        }
 
         //Increment number of queries run
         static::incrementNumQueries();
@@ -430,5 +436,16 @@ class Wye
     public static function countTransactions()
     {
         return count(static::$transactions);
+    }
+
+    public static function currentTransaction()
+    {
+        if (empty(static::transactions())) {
+            throw new Exception("There are no transactions available.");
+        }
+
+        $transactions = static::transactions();
+
+        return end($transactions);
     }
 }

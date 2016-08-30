@@ -20,7 +20,6 @@ use Stratedge\Wye\Wye;
  *   - Implement the `inTransaction` method
  *   - Implement the `lastInsertId` method
  *   - Implement the `query` method
- *   - Implement the `quote` method
  *   - Implement the `rollBack` method
  *   - Implement the `setAttribute` method
  */

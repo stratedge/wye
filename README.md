@@ -168,7 +168,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement the `inTransaction` method
 - Implement the `lastInsertId` method
 - Implement the `query` method
-- Implement the `quote` method
+- ~~Implement the `quote` method~~
 - Implement the `rollBack` method
 - Implement the `setAttribute` method
 

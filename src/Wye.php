@@ -53,6 +53,8 @@ class Wye
         static::resetResults();
         static::resetNumQueries();
         static::resetQuotes();
+        static::resetInTransaction();
+        static::resetTransactions();
     }
 
 

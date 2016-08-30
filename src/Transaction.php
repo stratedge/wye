@@ -2,6 +2,8 @@
 
 namespace Stratedge\Wye;
 
+use Stratedge\Wye\PDO\PDOStatement;
+
 class Transaction
 {
     /**
@@ -103,6 +105,9 @@ class Transaction
 
     public function addStatement(PDOStatement $statement)
     {
+        //Add this transation to the statement
+        $statement->transaction($this);
+
         $this->statements[] = $statement;
     }
 }

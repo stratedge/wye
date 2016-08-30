@@ -24,6 +24,11 @@ class Wye
      */
     protected static $num_queries = 0;
 
+    /**
+     * @var array
+     */
+    protected static $quotes = [];
+
 
     /**
      * Resets all the static properties so that a new test can be run with fresh
@@ -36,6 +41,7 @@ class Wye
         static::resetStatements();
         static::resetResults();
         static::resetNumQueries();
+        static::resetQuotes();
     }
 
 
@@ -114,6 +120,26 @@ class Wye
 
         //Increment number of queries run
         static::incrementNumQueries();
+    }
+
+
+    public static function quote($string, $param_type = null)
+    {
+        $data = [
+            "string" => $string,
+            "param_type" => $param_type
+        ];
+
+        $num_quotes = static::getNumQuotes();
+
+        static::addQuote($data);
+
+        return sprintf(
+            "<quote:%d>%s</quote:%d>",
+            $num_quotes,
+            $string,
+            $num_quotes
+        );
     }
 
 
@@ -246,5 +272,48 @@ class Wye
         $num_queries++;
 
         static::numQueries($num_queries);
+    }
+
+
+
+    //**************************************************************************
+    // QUOTES
+    //**************************************************************************
+
+    public static function quotes($quotes = null)
+    {
+        if (is_null($quotes)) {
+            return static::getQuotes();
+        } else {
+            return static::setQuotes($quotes);
+        }
+    }
+
+    public static function getQuotes()
+    {
+        return static::$quotes;
+    }
+
+    public static function setQuotes(array $quotes = [])
+    {
+        static::$quotes = $quotes;
+    }
+
+    public static function addQuote(array $quote)
+    {
+        $quotes = static::getQuotes();
+        $quotes[] = $quote;
+
+        static::setQuotes($quotes);
+    }
+
+    public static function getNumQuotes()
+    {
+        return count(static::getQuotes());
+    }
+
+    public static function resetQuotes()
+    {
+        static::setQuotes([]);
     }
 }

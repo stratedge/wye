@@ -150,7 +150,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 
 ### Stratedge\Wye\Wye
 
-- Remove boot functionality
+- ~~Remove boot functionality~~
 - Implement a collection for storing statements
 - Implement a collection for storing results
 - Implement recording when transactions are used
@@ -191,7 +191,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement `nextRowset` method
 - Implement `rowCount` method
 - Implement `setAttribute` method
-- Implement `setFetchMode` method
+- ~~Implement `setFetchMode` method~~
 
 ### Stratedge\Wye\Result
 

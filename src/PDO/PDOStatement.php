@@ -27,7 +27,6 @@ use Stratedge\Wye\Wye;
  *   - Implement `nextRowset` method
  *   - Implement `rowCount` method
  *   - Implement `setAttribute` method
- *   - Implement `setFetchMode` method
  */
 class PDOStatement extends BasePDOStatement
 {
@@ -53,6 +52,11 @@ class PDOStatement extends BasePDOStatement
      * @var Result
      */
     protected $result;
+
+    /**
+     * @var array
+     */
+    protected $fetch_mode = [PDO::ATTR_DEFAULT_FETCH_MODE];
 
 
     /**
@@ -106,7 +110,30 @@ class PDOStatement extends BasePDOStatement
      */
     public function fetchAll($how = null, $class_name = null, $ctor_args = null)
     {
+        if (is_null($how)) {
+            $defaults = $this->fetchMode();
+
+            $how = $defaults[0];
+            $class_name = !empty($defaults[1]) ? $defaults[1] : null;
+            $ctor_args = !empty($defaults[2]) ? $defaults[2] : null;
+        }
+
         return $this->result()->fetchAll($how, $class_name, $ctor_args);
+    }
+
+
+    /**
+     * Mimic for PDOStatement::setFetchMode(). Sets the default fetch mode and
+     * associated options
+     *
+     * @param int   $mode      Integer value derived from PDO::FETCH_* constants
+     * @param mixed $params    Additional params dependent on fetch mode
+     * @param mixed $ctor_args Additional params dependent on fetch mode
+     */
+    public function setFetchMode($mode, $params = null, $ctor_args = null)
+    {
+        $this->fetch_mode = array_slice(func_get_args(), 0, 3);
+        return true;
     }
 
 
@@ -211,5 +238,25 @@ class PDOStatement extends BasePDOStatement
     {
         $this->result = $result;
         return $this;
+    }
+
+
+
+    //**************************************************************************
+    // FETCH_MODE
+    //**************************************************************************
+
+    public function fetchMode(array $fetch_mode = null)
+    {
+        if (is_null($fetch_mode)) {
+            return $this->getFetchMode();
+        } else {
+            return $this->setFetchMode($fetch_mode);
+        }
+    }
+
+    public function getFetchMode()
+    {
+        return $this->fetch_mode;
     }
 }

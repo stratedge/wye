@@ -29,6 +29,11 @@ class Wye
      */
     protected static $quotes = [];
 
+    /**
+     * @var bool
+     */
+    protected static $in_transaction = false;
+
 
     /**
      * Resets all the static properties so that a new test can be run with fresh
@@ -315,5 +320,35 @@ class Wye
     public static function resetQuotes()
     {
         static::setQuotes([]);
+    }
+
+
+
+    //**************************************************************************
+    // IN TRANSACTION
+    //**************************************************************************
+
+    public static function inTransaction(bool $in_transaction = null)
+    {
+        if (is_null($in_transaction)) {
+            return static::getInTransaction();
+        } else {
+            return static::setInTransaction($in_transaction);
+        }
+    }
+
+    public static function getInTransaction()
+    {
+        return static::$in_transaction;
+    }
+
+    public static function setInTransaction(bool $in_transaction)
+    {
+        static::$in_transaction = $in_transaction;
+    }
+
+    public static function resetInTransaction()
+    {
+        static::setInTransaction(false);
     }
 }

@@ -6,6 +6,7 @@ use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOStatement;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Row;
+use Stratedge\Wye\Transaction;
 
 class Wye
 {
@@ -33,6 +34,11 @@ class Wye
      * @var bool
      */
     protected static $in_transaction = false;
+
+    /**
+     * @var array
+     */
+    protected static $transactions = [];
 
 
     /**
@@ -350,5 +356,45 @@ class Wye
     public static function resetInTransaction()
     {
         static::setInTransaction(false);
+    }
+
+
+
+    //**************************************************************************
+    // TRANSACTIONS
+    //**************************************************************************
+
+    public static function transactions(array $transactions = null)
+    {
+        if (is_null($transactions)) {
+            return static::getTransactions();
+        } else {
+            return static::setTransactions($transactions);
+        }
+    }
+
+    public static function getTransactions()
+    {
+        return static::$transactions;
+    }
+
+    public static function setTransactions(array $transactions)
+    {
+        static::$transactions = $transactions;
+    }
+
+    public static function resetTransactions()
+    {
+        static::setTransactions([]);
+    }
+
+    public static function addTransaction(Transaction $transaction)
+    {
+        static::$transactions[] = $transaction;
+    }
+
+    public static function countTransactions()
+    {
+        return count(static::$transactions);
     }
 }

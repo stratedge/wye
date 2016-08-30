@@ -3,6 +3,7 @@
 namespace Stratedge\Wye;
 
 use Stratedge\Wye\PDO\PDO;
+use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Row;
@@ -160,6 +161,30 @@ class Wye
             $string,
             $num_quotes
         );
+    }
+
+
+    /**
+     * Places Wye into transaction mode and increments number of transactions.
+     * If a transaction is already open, throws a PDOException
+     *
+     * @todo Flesh out the details for the PDOException properly
+     *
+     * @throws PDOException
+     *
+     * @return void
+     */
+    public static function beginTransaction()
+    {
+        if (static::inTransaction()) {
+            throw new PDOException();
+        }
+
+        static::inTransaction(true);
+
+        $transaction = static::makeTransaction(static::countTransactions());
+
+        static::addTransaction($transaction);
     }
 
 

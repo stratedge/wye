@@ -26,6 +26,11 @@ class Result
     protected $columns = [];
 
     /**
+     * @var integer
+     */
+    protected $current_index = 0;
+
+    /**
      * @var string|null
      */
     protected $last_insert_id;
@@ -42,6 +47,32 @@ class Result
     public function __construct(Wye $wye)
     {
         $this->wye($wye);
+    }
+
+
+    /**
+     * Formats the next row according to the formatting parameters provided.
+     *
+     * @todo Handle when there are no more rows to get - return false?
+     *
+     * @param  integer $how
+     * @param  integer $orientation
+     * @param  integer $offset
+     * @return mixed
+     */
+    public function fetch($how, $orientation, $offset)
+    {
+        $rows = $this->rows();
+
+        if (!isset($rows[$this->current_index])) {
+            return false;
+        }
+
+        $row = $rows[$this->current_index];
+
+        $this->current_index++;
+
+        return $row->format($how, $orientation, $offset);
     }
 
 

@@ -17,7 +17,7 @@ use Stratedge\Wye\Wye;
  *   - Implement the `getAttribute` method
  *   - Implement the `getAvailableDrivers` method
  *   - Implement the `inTransaction` method
- *   - Implement the `lastInsertId` method
+ *   - Finish the `lastInsertId` method
  *   - Implement the `query` method
  *   - Implement the `rollBack` method
  *   - Implement the `setAttribute` method

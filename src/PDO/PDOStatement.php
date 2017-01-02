@@ -19,10 +19,9 @@ use Stratedge\Wye\Wye;
  *   - Implement `debugDumpParams` method
  *   - Implement `errorCode` method
  *   - Implement `errorInfo` method
- *   - Implement `execute` method
- *   - Implement `fetch` method
+ *   - Finish `execute` method
+ *   - Finish `fetch` method
  *   - Implement `fetchColumn` method
- *   - Implement `fetchObject` method
  *   - Implement `getAttribute` method
  *   - Implement `getColumnMeta` method
  *   - Implement `nextRowset` method

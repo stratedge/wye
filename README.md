@@ -159,6 +159,11 @@ Wye is far from finished. _Repeat: far from finished_. It works for a few cases 
 
 Below are the areas needing work. If you'd like to help, pull requests are accepted!
 
+Definitions:
+
+* Items marked with **_Implement_** have not yet been started and must be built.
+* Items marked with **_Finish_** are presently available for use, but may not account for all the possible functionality/errors that must be implemented.
+
 ### Stratedge\Wye\Wye
 
 - ~~Remove boot functionality~~
@@ -177,7 +182,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement the `getAttribute` method
 - Implement the `getAvailableDrivers` method
 - Implement the `inTransaction` method
-- Implement the `lastInsertId` method - **In Progress, Available For Use**
+- Finish the `lastInsertId` method
 - Implement the `query` method
 - ~~Implement the `quote` method~~
 - Implement the `rollBack` method
@@ -193,11 +198,11 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement `debugDumpParams` method
 - Implement `errorCode` method
 - Implement `errorInfo` method
-- Implement `execute` method - **In Progress, Available For Use**
-- Implement `fetch` method
+- Finish `execute` method
+- Finish `fetch` method
 - ~~Implement `fetchAll` method~~
 - Implement `fetchColumn` method
-- Implement `fetchObject` method
+- ~~Implement `fetchObject` method~~
 - Implement `getAttribute` method
 - Implement `getColumnMeta` method
 - Implement `nextRowset` method
@@ -207,9 +212,8 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 
 ### Stratedge\Wye\Result
 
-- Implement `fetch` method
+- Finish `fetch` method
 - Implement `fetchColumn` method
-- Implement `fetchObject` method
 - Implement `rowCount` method
 
 ### Stratedge\Wye\Row
@@ -221,7 +225,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement `PDO::FETCH_LAZY`
 - Implement `PDO::FETCH_NAMED`
 - Implement `PDO::FETCH_NUM`
-- Implement `PDO::FETCH_OBJ`
+- ~~Implement `PDO::FETCH_OBJ`~~
 
 ## Acknowledgements
 

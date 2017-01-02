@@ -52,7 +52,6 @@ class Row
          *     - Implement PDO::FETCH_LAZY
          *     - Implement PDO::FETCH_NAMED
          *     - Implement PDO::FETCH_NUM
-         *     - Implement PDO::FETCH_OBJ
          */
 
         switch ($how) {
@@ -64,6 +63,9 @@ class Row
                 break;
             case PDO::FETCH_CLASS:
                 $data = $this->formatClass($class_name, $ctor_args);
+                break;
+            case PDO::FETCH_OBJ:
+                $data = $this->formatObj();
                 break;
             default:
                 throw new Exception("Need to implement formatter for $how");
@@ -124,6 +126,17 @@ class Row
         }
 
         return $data;
+    }
+
+
+    /**
+     * Formats and returns the row's data as an anonymous object.
+     *
+     * @return \stdClass
+     */
+    protected function formatObj()
+    {
+        return (object) $this->data();
     }
 
 

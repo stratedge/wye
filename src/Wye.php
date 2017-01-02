@@ -233,6 +233,11 @@ class Wye
         static::statements($statements);
     }
 
+    public static function getLastStatement()
+    {
+        return static::getStatementAtIndex(count(static::getStatements()) - 1);
+    }
+
     public static function getStatementAtIndex($index = 0)
     {
         $statements = static::statements();

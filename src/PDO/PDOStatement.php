@@ -99,9 +99,28 @@ class PDOStatement extends BasePDOStatement
     }
 
 
+    /**
+     * Mimic for PDOStatement::fetch(). Retrieves a single row from the result
+     * set consistent with the fetch method given.
+     *
+     * @todo Implement the orientation parameter
+     *
+     * @param  integer|null $how
+     * @param  mixed        $orientation
+     * @param  mixed        $offset
+     * @return mixed
+     */
     public function fetch($how = null, $orientation = null, $offset = null)
     {
-        throw new Exception("PDOStatement::fetch() is not yet implemented by Wye.");
+        if (is_null($how)) {
+            $defaults = $this->fetchMode();
+
+            $how = $defaults[0];
+            $orientation = !empty($defaults[1]) ? $defaults[1] : null;
+            $offset = !empty($defaults[2]) ? $defaults[2] : null;
+        }
+
+        return $this->result()->fetch($how, $orientation, $offset);
     }
 
 

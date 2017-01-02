@@ -26,6 +26,11 @@ class Result
     protected $columns = [];
 
     /**
+     * @var string|null
+     */
+    protected $lastInsertId;
+
+    /**
      * @var array
      */
     protected $rows = [];
@@ -111,6 +116,29 @@ class Result
         return count($this->columns());
     }
 
+
+    //**************************************************************************
+    // LAST INSERT ID
+    //**************************************************************************
+
+    public function lastInsertId($id = null)
+    {
+        if (is_null($id)) {
+            return $this->getLastInsertId();
+        } else {
+            return $this->setLastInsertId($id);
+        }
+    }
+
+    public function getLastInsertId()
+    {
+        return $this->lastInsertId;
+    }
+
+    public function setLastInsertId($id)
+    {
+        $this->lastInsertId = (string) $id;
+    }
 
 
     //**************************************************************************

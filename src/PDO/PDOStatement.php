@@ -148,6 +148,21 @@ class PDOStatement extends BasePDOStatement
 
 
     /**
+     * Mimic for PDOStatement::fetchObject(). Returns the next row as an
+     * instance of the given class with properties corresponding to the result
+     * columns.
+     *
+     * @param  string $class_name
+     * @param  array  $ctor_args
+     * @return object
+     */
+    public function fetchObject($class_name = 'stdClass', $ctor_args = [])
+    {
+        return $this->fetch(PDO::FETCH_CLASS, $class_name, $ctor_args);
+    }
+
+
+    /**
      * Mimic for PDOStatement::setFetchMode(). Sets the default fetch mode and
      * associated options
      *

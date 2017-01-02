@@ -53,6 +53,25 @@ class PDO extends BasePDO
         return true;
     }
 
+    /**
+     * Mimic for PDO::lastInsertId(). Returns the last insert ID value for the
+     * last used statement result.
+     *
+     * @todo Handle the scenario where there is no result set to reference
+     * @todo Implement the name parameter
+     * @todo Handle returning the correct value when transactions are involved
+     *
+     * @param  string|null $name
+     * @return string|null
+     */
+    public function lastInsertId($name = null)
+    {
+        return $this->wye()
+            ->getLastStatement()
+            ->result()
+            ->lastInsertId();
+    }
+
 
     /**
      * Mimic for PDO::prepare(). Generates and returns a mock PDOStatement

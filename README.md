@@ -84,6 +84,17 @@ $result->addRow([7, "Engine 8"]); //Row defined by plain array
 	]);
 ```
 
+#### Setting the Last Insert ID
+
+When conducting inserts, you may need to get the ID of the last inserted row through the `PDO::lastInsertId()` method. Since no actual rows are created by Wye, you will need to define the last insert ID on the `Stratedge\Wye\Result` object that corresponds to the insert statement.
+
+> **NOTE:** All values added as last insert IDs will be converted to and returned as strings.
+
+```php
+$result->lastInsertId(5); //Use the "smart" getter/setter method which sets the value if one is provided
+$result->setLastInserId(5); //Or use the explicit setter
+```
+
 #### Attaching Results
 
 Once the result is built it must be attached to the Wye so it can be served when a query is executed. You can attach as many `Stratedge\Wye\Result` objects to the Wye as you wish, and the same `Stratedge\Wye\Result` object can be attached any number of times. Results are used in the order that they are attached.
@@ -166,7 +177,7 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement the `getAttribute` method
 - Implement the `getAvailableDrivers` method
 - Implement the `inTransaction` method
-- Implement the `lastInsertId` method
+- Implement the `lastInsertId` method - **In Progress, Available For Use**
 - Implement the `query` method
 - ~~Implement the `quote` method~~
 - Implement the `rollBack` method
@@ -182,8 +193,9 @@ Below are the areas needing work. If you'd like to help, pull requests are accep
 - Implement `debugDumpParams` method
 - Implement `errorCode` method
 - Implement `errorInfo` method
-- Implement `execute` method
+- Implement `execute` method - **In Progress, Available For Use**
 - Implement `fetch` method
+- ~~Implement `fetchAll` method~~
 - Implement `fetchColumn` method
 - Implement `fetchObject` method
 - Implement `getAttribute` method

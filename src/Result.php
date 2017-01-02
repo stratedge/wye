@@ -28,7 +28,7 @@ class Result
     /**
      * @var string|null
      */
-    protected $lastInsertId;
+    protected $last_insert_id;
 
     /**
      * @var array
@@ -132,12 +132,12 @@ class Result
 
     public function getLastInsertId()
     {
-        return $this->lastInsertId;
+        return $this->last_insert_id;
     }
 
     public function setLastInsertId($id)
     {
-        $this->lastInsertId = (string) $id;
+        $this->last_insert_id = (string) $id;
     }
 
 

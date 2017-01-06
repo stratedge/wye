@@ -88,11 +88,14 @@ $result->addRow([7, "Engine 8"]); //Row defined by plain array
 
 When conducting inserts, you may need to get the ID of the last inserted row through the `PDO::lastInsertId()` method. Since no actual rows are created by Wye, you will need to define the last insert ID on the `Stratedge\Wye\Result` object that corresponds to the insert statement.
 
-> **NOTE:** All values added as last insert IDs will be converted to and returned as strings.
+> **NOTE:** All values added as last insert IDs will be converted to and returned as strings. If the value cannot be converted to a string, PHP will throw an exception/throwable.
 
 ```php
 $result->lastInsertId(5); //Use the "smart" getter/setter method which sets the value if one is provided
 $result->setLastInserId(5); //Or use the explicit setter
+
+//The methods that set the last insert ID return the Result object for chaining
+Wye::makeResult()->lastInsertId(10)->attach();
 ```
 
 #### Attaching Results

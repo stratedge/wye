@@ -169,6 +169,7 @@ class Result
     public function setLastInsertId($id)
     {
         $this->last_insert_id = (string) $id;
+        return $this;
     }
 
 

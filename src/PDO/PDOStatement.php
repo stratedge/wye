@@ -3,6 +3,7 @@
 namespace Stratedge\Wye\PDO;
 
 use PDOStatement as BasePDOStatement;
+use RuntimeException;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
@@ -25,13 +26,11 @@ use Stratedge\Wye\Wye;
  *   - Implement `getAttribute` method
  *   - Implement `getColumnMeta` method
  *   - Implement `nextRowset` method
- *   - Implement `rowCount` method
  *   - Implement `setAttribute` method
  */
 class PDOStatement extends BasePDOStatement
 {
     use UsesWye;
-
 
     /**
      * @var string
@@ -62,7 +61,6 @@ class PDOStatement extends BasePDOStatement
      * @var Transaction
      */
     protected $transaction;
-
 
     /**
      * @param Wye    $wye
@@ -173,6 +171,22 @@ class PDOStatement extends BasePDOStatement
     {
         $this->fetch_mode = array_slice(func_get_args(), 0, 3);
         return true;
+    }
+
+
+    /**
+     * Mimic for PDOStatement::rowCount(). Returns the number of rows associated
+     * with the result of the statement execution.
+     *
+     * @return int
+     */
+    public function rowCount()
+    {
+        if (is_null($this->result)) {
+            throw new RuntimeException('Call to PDOStatement::rowCount with no associated Result.');
+        }
+
+        return $this->result->getNumRows();
     }
 
 

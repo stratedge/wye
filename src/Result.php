@@ -36,6 +36,11 @@ class Result
     protected $last_insert_id;
 
     /**
+     * @var int|null
+     */
+    protected $num_rows;
+
+    /**
      * @var array
      */
     protected $rows = [];

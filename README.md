@@ -98,6 +98,23 @@ $result->setLastInserId(5); //Or use the explicit setter
 Wye::makeResult()->lastInsertId(10)->attach();
 ```
 
+#### Setting the Row Count
+
+By default, when the `rowCount()` method is called on `Stratedge\Wye\PDOStatement`, the count of rows that have been added to the corresponding `Stratedge\Wye\Result` object will be returned.
+
+You can control this number by setting a row count manually, which will override the count of rows contained in the result, by calling `Stratedge\Wye\Result::setNumRows()`.
+
+```php
+//By default, the number of added rows is returned as the row count
+$result->addRow(['id' => 47]); //Row-count is now 1
+
+//Override the default by manually setting the number of rows affected
+$result->setNumRows(12); //Row-count will now return 12
+
+//The method that sets the number of rows returns the Result object for chaining
+$result->setNumRows(3)->attach();
+```
+
 #### Attaching Results
 
 Once the result is built it must be attached to the Wye so it can be served when a query is executed. You can attach as many `Stratedge\Wye\Result` objects to the Wye as you wish, and the same `Stratedge\Wye\Result` object can be attached any number of times. Results are used in the order that they are attached.
@@ -209,7 +226,7 @@ Definitions:
 - Implement `getAttribute` method
 - Implement `getColumnMeta` method
 - Implement `nextRowset` method
-- Implement `rowCount` method
+- ~~Implement `rowCount` method~~
 - Implement `setAttribute` method
 - ~~Implement `setFetchMode` method~~
 

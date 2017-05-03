@@ -197,6 +197,20 @@ class Result
         return $this->num_rows;
     }
 
+    /**
+     * Set the number of row the result should return as having been selected or
+     * affected.
+     *
+     * @param  int $num_rows
+     * @return self
+     */
+    public function setNumRows($num_rows)
+    {
+        $this->num_rows = (int) $num_rows;
+
+        return $this;
+    }
+
 
     //**************************************************************************
     // ROWS

@@ -179,6 +179,26 @@ class Result
 
 
     //**************************************************************************
+    // NUM_ROWS
+    //**************************************************************************
+
+    /**
+     * Retrieves the number of rows associated to the result. If the property is
+     * not set, the count of $rows property will be returned.
+     *
+     * @return int
+     */
+    public function getNumRows()
+    {
+        if (is_null($this->num_rows)) {
+            return count($this->rows);
+        }
+
+        return $this->num_rows;
+    }
+
+
+    //**************************************************************************
     // ROWS
     //**************************************************************************
 

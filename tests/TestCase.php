@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase as BaseTestCase;
+// use PHPUnit_Framework_TestCase as BaseTestCase;
 use Stratedge\Wye\Wye;
 
-class TestCase extends BaseTestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

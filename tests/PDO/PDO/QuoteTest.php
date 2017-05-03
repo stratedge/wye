@@ -31,7 +31,7 @@ class QuoteTest extends TestCase
 
     public function testInvalidTypeThrowsException()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $pdo = Wye::makePDO();
 

@@ -18,7 +18,7 @@ class BeginTransactionTest extends TestCase
 
     public function testExceptionThrownWhenAlreadyInTransaction()
     {
-        $this->setExpectedException(PDOException::class);
+        $this->expectException(PDOException::class);
 
         $pdo = Wye::makePDO();
 

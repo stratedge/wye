@@ -16,9 +16,7 @@ class SetNumRowsTest extends \Tests\TestCase
 
     public function testSetsPropertyValue()
     {
-        $result = new class (new Wye) extends Result {
-            public $num_rows;
-        };
+        $result = new Mock(new Wye);
 
         $result->setNumRows(56342);
 
@@ -27,12 +25,15 @@ class SetNumRowsTest extends \Tests\TestCase
 
     public function testSetsPropertyValueAsInteger()
     {
-        $result = new class (new Wye) extends Result {
-            public $num_rows;
-        };
+        $result = new Mock(new Wye);
 
         $result->setNumRows('hello');
 
         $this->assertSame(0, $result->num_rows);
     }
+}
+
+class Mock extends Result
+{
+    public $num_rows;
 }

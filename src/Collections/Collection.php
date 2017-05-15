@@ -228,7 +228,10 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
             $this->checkType($value);
         }
 
-        array_unshift($this->items, ...$values);
+        //This implementation maintains support for HHVM
+        foreach (array_reverse($values) as $value) {
+            array_unshift($this->items, $value);
+        }
 
         return $this;
     }

@@ -1,6 +1,9 @@
 # Wye
 
 [![Build Status](https://travis-ci.org/stratedge/wye.svg?branch=master)](https://travis-ci.org/stratedge/wye)
+[![Latest Stable Version](https://poser.pugx.org/stratedge/wye/v/stable)](https://packagist.org/packages/stratedge/wye)
+[![Total Downloads](https://poser.pugx.org/stratedge/wye/downloads)](https://packagist.org/packages/stratedge/wye)
+[![License](https://poser.pugx.org/stratedge/wye/license)](https://packagist.org/packages/stratedge/wye)
 
 A library for mocking native PDO connections and query results
 
@@ -182,6 +185,10 @@ Definitions:
 
 * Items marked with **_Implement_** have not yet been started and must be built.
 * Items marked with **_Finish_** are presently available for use, but may not account for all the possible functionality/errors that must be implemented.
+
+### General
+
+- Phase out the "smart" getters and setters
 
 ### Stratedge\Wye\Wye
 

@@ -3,6 +3,7 @@
 namespace Stratedge\Wye;
 
 use Exception;
+use Stratedge\Wye\Binding;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
@@ -115,6 +116,24 @@ class Wye
     {
         $transaction = new Transaction($index);
         return $transaction;
+    }
+
+
+    /**
+     * Creates a new instance of Stratedge\Wye\Binding.
+     *
+     * @param  int|string $parameter
+     * @param  mixed      $value
+     * @param  int        $data_type
+     * @return Binding
+     */
+    public static function makeBinding(
+        $parameter,
+        $value,
+        $data_type = PDO::PARAM_STR
+    ) {
+        $binding = new Binding(new static, $parameter, $value, $data_type);
+        return $binding;
     }
 
 

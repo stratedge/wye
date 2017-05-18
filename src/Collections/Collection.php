@@ -93,6 +93,18 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Empties the collection.
+     *
+     * @return self
+     */
+    public function clear()
+    {
+        $this->items = [];
+
+        return $this;
+    }
+
+    /**
      * Retrieve the first item in the collection, or the first item that matches
      * the criteria defined in a function. When matching by a function, a
      * default value may be set if no results are found.

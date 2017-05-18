@@ -4,6 +4,7 @@ namespace Stratedge\Wye\PDO;
 
 use PDOStatement as BasePDOStatement;
 use RuntimeException;
+use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
@@ -31,6 +32,11 @@ use Stratedge\Wye\Wye;
 class PDOStatement extends BasePDOStatement
 {
     use UsesWye;
+
+    /**
+     * @var BindingCollection
+     */
+    protected $bindings;
 
     /**
      * @var string

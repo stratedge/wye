@@ -205,6 +205,13 @@ class PDOStatement extends BasePDOStatement
         return $this->bindings;
     }
 
+    public function setBindings(BindingCollection $bindings)
+    {
+        $this->bindings = $bindings;
+
+        return $this;
+    }
+
     //**************************************************************************
     // STATEMENT
     //**************************************************************************

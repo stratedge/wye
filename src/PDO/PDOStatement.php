@@ -69,6 +69,8 @@ class PDOStatement extends BasePDOStatement
     protected $transaction;
 
     /**
+     * Create a new instance of PDOStatement.
+     *
      * @param Wye    $wye
      * @param string $statement
      * @param array  $options
@@ -78,6 +80,8 @@ class PDOStatement extends BasePDOStatement
         $this->wye($wye);
         $this->statement($statement);
         $this->options($options);
+
+        $this->bindings = $this->wye->makeBindingCollection();
     }
 
 

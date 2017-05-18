@@ -91,6 +91,25 @@ class PDOStatement extends BasePDOStatement
     //**************************************************************************
 
     /**
+     * Mimic for PDOStatement::bindValue(). Records the binding of a value to a
+     * parameter in the query.
+     *
+     * @param  int|string $parameter
+     * @param  mixed      $value
+     * @param  int        $data_type
+     * @return boolean
+     */
+    public function bindValue($parameter, $value, $data_type = PDO::PARAM_STR)
+    {
+        $this->bindings->push(
+            $this->wye->makeBinding($parameter, $value, $data_type)
+        );
+
+        return true;
+    }
+
+
+    /**
      * Mimic for PDOStatement::execute(). Records the statement execution and
      * returns true.
      *

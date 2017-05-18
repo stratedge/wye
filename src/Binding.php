@@ -34,8 +34,12 @@ class Binding
      * @param mixed  $value
      * @param int    $data_type
      */
-    public function __construct(Wye $wye, $parameter, $value, $data_type)
-    {
+    public function __construct(
+        Wye $wye,
+        $parameter,
+        $value,
+        $data_type = PDO::PARAM_STR
+    ) {
         $this->setWye($wye);
         $this->setParameter($parameter);
         $this->setValue($value);

@@ -9,13 +9,22 @@ use Stratedge\Wye\Wye;
 
 class SetParameterTest extends \Tests\TestCase
 {
-    public function testSetsParameter()
+    public function testSetsStringParameter()
     {
         $binding = new Binding(new Wye, 'truck', 'Engine', PDO::PARAM_STR);
 
         $binding->setParameter('apparatus');
 
         $this->assertSame('apparatus', $binding->getParameter());
+    }
+
+    public function testSetsIntegerParameter()
+    {
+        $binding = new Binding(new Wye, 1, 'Engine', PDO::PARAM_STR);
+
+        $binding->setParameter(3);
+
+        $this->assertSame(3, $binding->getParameter());
     }
 
     public function testInvalidValueThrowsException()

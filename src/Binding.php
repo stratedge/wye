@@ -64,9 +64,9 @@ class Binding
      */
     public function setParameter($parameter)
     {
-        if (!is_string($parameter)) {
+        if (!is_string($parameter) && !is_int($parameter)) {
             throw new InvalidArgumentException(
-                'Binding parameter value must be a string.'
+                'Binding parameter value must be a string or an integer.'
             );
         }
 

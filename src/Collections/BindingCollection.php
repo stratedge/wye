@@ -19,6 +19,22 @@ class BindingCollection extends Collection
     }
 
     /**
+     * Create a new collection with only bindings with a parameter that matches
+     * the provided parameter value.
+     *
+     * @param  int|string        $parameter
+     * @return BindingCollection
+     */
+    public function filterByParameter($parameter)
+    {
+        $callback = function (Binding $binding, $key) use ($parameter) {
+            return $binding->getParameter() == $parameter;
+        };
+
+        return $this->filter($callback);
+    }
+
+    /**
      * Rebuilds the contents of the collection based on the provided array. Keys
      * become binding parameters and values are used for binding values.
      * 0-indexed numerical-keyed arrays are shifted once to begin with 1.

@@ -35,6 +35,22 @@ class BindingCollection extends Collection
     }
 
     /**
+     * Create a new collection with only bindings with a value that matches the
+     * provided value.
+     *
+     * @param  mixed             $value
+     * @return BindingCollection
+     */
+    public function filterByValue($value)
+    {
+        $callback = function (Binding $binding, $key) use ($value) {
+            return $binding->getValue() == $value;
+        };
+
+        return $this->filter($callback);
+    }
+
+    /**
      * Rebuilds the contents of the collection based on the provided array. Keys
      * become binding parameters and values are used for binding values.
      * 0-indexed numerical-keyed arrays are shifted once to begin with 1.

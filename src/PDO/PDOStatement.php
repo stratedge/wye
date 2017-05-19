@@ -15,7 +15,6 @@ use Stratedge\Wye\Wye;
  * @todo
  *   - Implement `bindColumn` method
  *   - Implement `bindParam` method
- *   - Implement `bindValue` method
  *   - Implement `closeCursor` method
  *   - Implement `columnCount` method
  *   - Implement `debugDumpParams` method
@@ -219,11 +218,22 @@ class PDOStatement extends BasePDOStatement
     // BINDINGS
     //**************************************************************************
 
+    /**
+     * Retrieve the value of the bindings property.
+     *
+     * @return BindingCollection
+     */
     public function getBindings()
     {
         return $this->bindings;
     }
 
+    /**
+     * Set the value of the bindings property.
+     *
+     * @param  BindingCollection $bindings
+     * @return self
+     */
     public function setBindings(BindingCollection $bindings)
     {
         $this->bindings = $bindings;

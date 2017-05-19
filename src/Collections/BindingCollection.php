@@ -98,6 +98,18 @@ class BindingCollection extends Collection
     }
 
     /**
+     * Determines if the given data type is used by any of the bindings
+     * contained in the collection.
+     *
+     * @param  int     $data_type
+     * @return boolean
+     */
+    public function hasDataType($data_type)
+    {
+        return $this->filterByDataType($data_type)->isNotEmpty();
+    }
+
+    /**
      * Determines if the given parameter exists in any of the bindings in the
      * collection.
      *

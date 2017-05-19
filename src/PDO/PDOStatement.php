@@ -4,7 +4,7 @@ namespace Stratedge\Wye\PDO;
 
 use PDOStatement as BasePDOStatement;
 use RuntimeException;
-use Stratedge\Wye\Collections\BindingCollection;
+use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
@@ -33,7 +33,7 @@ class PDOStatement extends BasePDOStatement
     use UsesWye;
 
     /**
-     * @var BindingCollection
+     * @var BindingCollectionInterface
      */
     protected $bindings;
 
@@ -221,7 +221,7 @@ class PDOStatement extends BasePDOStatement
     /**
      * Retrieve the value of the bindings property.
      *
-     * @return BindingCollection
+     * @return BindingCollectionInterface
      */
     public function getBindings()
     {
@@ -231,10 +231,10 @@ class PDOStatement extends BasePDOStatement
     /**
      * Set the value of the bindings property.
      *
-     * @param  BindingCollection $bindings
+     * @param  BindingCollectionInterface $bindings
      * @return self
      */
-    public function setBindings(BindingCollection $bindings)
+    public function setBindings(BindingCollectionInterface $bindings)
     {
         $this->bindings = $bindings;
 

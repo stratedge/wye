@@ -3,6 +3,7 @@
 namespace Tests\PDO\PDOStatement;
 
 use Stratedge\Wye\Collections\BindingCollection;
+use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\PDO\PDOStatement;
 use Stratedge\Wye\Wye;
 
@@ -12,7 +13,7 @@ class GetBindingsTest extends \Tests\TestCase
     {
         $stmt = new PDOStatement(new Wye, '', []);
 
-        $this->assertInstanceOf(BindingCollection::class, $stmt->getBindings());
+        $this->assertInstanceOf(BindingCollectionInterface::class, $stmt->getBindings());
     }
 
     public function testReturnsBindingsPropertyValue()

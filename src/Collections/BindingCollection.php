@@ -6,7 +6,7 @@ use PDO;
 use Stratedge\Wye\Binding;
 use Stratedge\Wye\Wye;
 
-class BindingCollection extends Collection
+class BindingCollection extends Collection implements BindingCollectionInterface
 {
     /**
      * Create a new instance of BindingCollection.
@@ -22,8 +22,8 @@ class BindingCollection extends Collection
     /**
      * Create a new collection with only bindings with a given data type.
      *
-     * @param  int               $data_type
-     * @return BindingCollection
+     * @param  int $data_type
+     * @return BindingCollectionInterface
      */
     public function filterByDataType($data_type)
     {
@@ -53,8 +53,8 @@ class BindingCollection extends Collection
      * Create a new collection with only bindings with a parameter that matches
      * the provided parameter value.
      *
-     * @param  int|string        $parameter
-     * @return BindingCollection
+     * @param  int|string $parameter
+     * @return BindingCollectionInterface
      */
     public function filterByParameter($parameter)
     {
@@ -69,8 +69,8 @@ class BindingCollection extends Collection
      * Create a new collection with only bindings with a value that matches the
      * provided value.
      *
-     * @param  mixed             $value
-     * @return BindingCollection
+     * @param  mixed $value
+     * @return BindingCollectionInterface
      */
     public function filterByValue($value)
     {
@@ -85,8 +85,8 @@ class BindingCollection extends Collection
      * Create a new collection with only bindings with a value that contain the
      * provided value.
      *
-     * @param  mixed             $value
-     * @return BindingCollection
+     * @param  mixed $value
+     * @return BindingCollectionInterface
      */
     public function filterByValueLike($value)
     {

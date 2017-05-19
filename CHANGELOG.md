@@ -6,14 +6,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Mock for the `PDOStatement::bindValue()` method
+- Inspect parameter, value, and data type bindings on executed statements
 - CHANGELOG.md
+
+### Changed
+- Remove the `params` property from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `params` method from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `getParams` method from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `setParams` method from `Stratedge\Wye\PDO\PDOStatement`
+- Drop support for HHVM <= 3.6
 
 ## [0.2.0] - 2017-05-02
 ### Added
 - Mock for the `PDOStatement::rowCount()` method
 - Return count of rows associated to a result
 - Override and set the count of rows for a specific result
-- Support for PHP 5.1
+- Support for PHP 7.1
 
 ### Changed
 - Drop support for PHP 5.5

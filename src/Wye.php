@@ -3,12 +3,11 @@
 namespace Stratedge\Wye;
 
 use Exception;
+use Stratedge\Wye\Collections\BindingCollection;
+use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
-use Stratedge\Wye\Result;
-use Stratedge\Wye\Row;
-use Stratedge\Wye\Transaction;
 
 class Wye
 {
@@ -119,7 +118,40 @@ class Wye
 
 
     /**
-     * Records a simulation of a query execution
+     * Creates a new instance of Stratedge\Wye\Binding.
+     *
+     * @param  int|string       $parameter
+     * @param  mixed            $value
+     * @param  int              $data_type
+     * @return BindingInterface
+     */
+    public static function makeBinding(
+        $parameter,
+        $value,
+        $data_type = PDO::PARAM_STR
+    ) {
+        $binding = new Binding(new static, $parameter, $value, $data_type);
+        return $binding;
+    }
+
+    /**
+     * Creates a new instance of BindingCollectionInterface.
+     *
+     * @param  array $items
+     * @return BindingCollectionInterface
+     */
+    public static function makeBindingCollection($items = [])
+    {
+        $collection = new BindingCollection(new static, $items);
+        return $collection;
+    }
+
+
+    /**
+     * Records a simulation of a query execution.
+     *
+     * @todo Raise an error if there are parameters already bound and params are
+     *     provided.
      *
      * @param  PDOStatement $statement
      * @param  array        $params
@@ -127,13 +159,16 @@ class Wye
      */
     public static function executeStatement(
         PDOStatement $statement,
-        array $params = []
+        array $params = null
     ) {
         //Add the statement to the list of those run
         static::addStatement($statement);
 
-        //Add params to the statement
-        $statement->params($params);
+        //Add bindings to the statement
+        if (is_array($params)) {
+            $statement->getBindings()
+                ->hydrateFromArray($params);
+        }
 
         $result = static::getResultAt(static::numQueries());
 

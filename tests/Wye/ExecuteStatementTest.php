@@ -2,6 +2,7 @@
 
 namespace Tests\Wye;
 
+use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Wye;
 use Tests\TestCase;
 
@@ -21,20 +22,42 @@ class ExecuteStatementTest extends TestCase
         $this->assertSame($statements[0], $statement);
     }
 
-
-    public function testParamsAddedToStatement()
+    public function testNonArrayParamsDoNotImpactBindings()
     {
-        $statement = Wye::makeStatement("SELECT * FROM `users`", []);
+        $stmt = Wye::makeStatement('', []);
 
-        //Make sure there are no params to start
-        $this->assertEmpty($statement->params());
+        $collection = $this->getMockBuilder(BindingCollection::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['hydrateFromArray'])
+            ->getMock();
 
-        Wye::executeStatement($statement, ["test" => true]);
+        $collection->expects($this->never())
+            ->method('hydrateFromArray');
 
-        //Make sure params have been updated
-        $this->assertSame(["test" => true], $statement->params());
+        $stmt->setBindings($collection);
+
+        Wye::executeStatement($stmt);
     }
 
+    public function testArrayParamsChangesBindings()
+    {
+        $stmt = Wye::makeStatement('', []);
+
+        $params = ['Engine 1', 'Pumper'];
+
+        $collection = $this->getMockBuilder(BindingCollection::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['hydrateFromArray'])
+            ->getMock();
+
+        $collection->expects($this->once())
+            ->method('hydrateFromArray')
+            ->with($params);
+
+        $stmt->setBindings($collection);
+
+        Wye::executeStatement($stmt, $params);
+    }
 
     public function testCorrespondingResultAddedToStatement()
     {
@@ -66,7 +89,6 @@ class ExecuteStatementTest extends TestCase
         $this->assertSame($result2, $statement2->result());
     }
 
-
     public function testNumQueriesIncremented()
     {
         $statement = Wye::makeStatement("SELECT * FROM `users`", []);
@@ -77,7 +99,6 @@ class ExecuteStatementTest extends TestCase
         }
     }
 
-
     public function testTransactionPropertyNotSetWithoutTransaction()
     {
         $statement = Wye::makeStatement("test", []);
@@ -86,7 +107,6 @@ class ExecuteStatementTest extends TestCase
 
         $this->assertAttributeSame(null, "transaction", $statement);
     }
-
 
     public function testTransactionPropertySetToCurrentTransaction()
     {

@@ -4,6 +4,7 @@ namespace Stratedge\Wye\PDO;
 
 use PDOStatement as BasePDOStatement;
 use RuntimeException;
+use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
@@ -14,7 +15,6 @@ use Stratedge\Wye\Wye;
  * @todo
  *   - Implement `bindColumn` method
  *   - Implement `bindParam` method
- *   - Implement `bindValue` method
  *   - Implement `closeCursor` method
  *   - Implement `columnCount` method
  *   - Implement `debugDumpParams` method
@@ -33,6 +33,11 @@ class PDOStatement extends BasePDOStatement
     use UsesWye;
 
     /**
+     * @var BindingCollectionInterface
+     */
+    protected $bindings;
+
+    /**
      * @var string
      */
     protected $statement;
@@ -41,11 +46,6 @@ class PDOStatement extends BasePDOStatement
      * @var array
      */
     protected $options;
-
-    /**
-     * @var array
-     */
-    protected $params = [];
 
     /**
      * @var Result
@@ -63,6 +63,8 @@ class PDOStatement extends BasePDOStatement
     protected $transaction;
 
     /**
+     * Create a new instance of PDOStatement.
+     *
      * @param Wye    $wye
      * @param string $statement
      * @param array  $options
@@ -72,6 +74,8 @@ class PDOStatement extends BasePDOStatement
         $this->wye($wye);
         $this->statement($statement);
         $this->options($options);
+
+        $this->bindings = $this->wye->makeBindingCollection();
     }
 
 
@@ -81,15 +85,35 @@ class PDOStatement extends BasePDOStatement
     //**************************************************************************
 
     /**
+     * Mimic for PDOStatement::bindValue(). Records the binding of a value to a
+     * parameter in the query.
+     *
+     * @param  int|string $parameter
+     * @param  mixed      $value
+     * @param  int        $data_type
+     * @return boolean
+     */
+    public function bindValue($parameter, $value, $data_type = PDO::PARAM_STR)
+    {
+        $this->bindings->push(
+            $this->wye->makeBinding($parameter, $value, $data_type)
+        );
+
+        return true;
+    }
+
+
+    /**
      * Mimic for PDOStatement::execute(). Records the statement execution and
      * returns true.
      *
-     * @todo This method should be optionally set to return false to mimic errors
+     * @todo This method should be optionally set to return false to mimic
+     *     errors
      *
      * @param  array  $params Column binding parameters
      * @return true
      */
-    public function execute($params = [])
+    public function execute($params = null)
     {
         $this->wye()->executeStatement($this, $params);
         return true;
@@ -190,6 +214,32 @@ class PDOStatement extends BasePDOStatement
     }
 
 
+    //**************************************************************************
+    // BINDINGS
+    //**************************************************************************
+
+    /**
+     * Retrieve the value of the bindings property.
+     *
+     * @return BindingCollectionInterface
+     */
+    public function getBindings()
+    {
+        return $this->bindings;
+    }
+
+    /**
+     * Set the value of the bindings property.
+     *
+     * @param  BindingCollectionInterface $bindings
+     * @return self
+     */
+    public function setBindings(BindingCollectionInterface $bindings)
+    {
+        $this->bindings = $bindings;
+
+        return $this;
+    }
 
     //**************************************************************************
     // STATEMENT
@@ -238,32 +288,6 @@ class PDOStatement extends BasePDOStatement
     public function setOptions($options)
     {
         $this->options = $options;
-        return $this;
-    }
-
-
-
-    //**************************************************************************
-    // PARAMS
-    //**************************************************************************
-
-    public function params($params = null)
-    {
-        if (is_null($params)) {
-            return $this->getParams();
-        } else {
-            return $this->setParams($params);
-        }
-    }
-
-    public function getParams()
-    {
-        return $this->params;
-    }
-
-    public function setParams(array $params)
-    {
-        $this->params = $params;
         return $this;
     }
 

@@ -151,7 +151,10 @@ class Wye
 
 
     /**
-     * Records a simulation of a query execution
+     * Records a simulation of a query execution.
+     *
+     * @todo Raise an error if there are parameters already bound and params are
+     *     provided.
      *
      * @param  PDOStatement $statement
      * @param  array        $params
@@ -159,13 +162,16 @@ class Wye
      */
     public static function executeStatement(
         PDOStatement $statement,
-        array $params = []
+        array $params = null
     ) {
         //Add the statement to the list of those run
         static::addStatement($statement);
 
-        //Add params to the statement
-        $statement->params($params);
+        //Add bindings to the statement
+        if (is_array($params)) {
+            $statement->getBindings()
+                ->hydrateFromArray($params);
+        }
 
         $result = static::getResultAt(static::numQueries());
 

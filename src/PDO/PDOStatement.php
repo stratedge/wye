@@ -113,12 +113,13 @@ class PDOStatement extends BasePDOStatement
      * Mimic for PDOStatement::execute(). Records the statement execution and
      * returns true.
      *
-     * @todo This method should be optionally set to return false to mimic errors
+     * @todo This method should be optionally set to return false to mimic
+     *     errors
      *
      * @param  array  $params Column binding parameters
      * @return true
      */
-    public function execute($params = [])
+    public function execute($params = null)
     {
         $this->wye()->executeStatement($this, $params);
         return true;

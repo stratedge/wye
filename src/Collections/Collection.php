@@ -161,6 +161,17 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Return a new collection where the items are the keys from the original
+     * collection.
+     *
+     * @return Collection
+     */
+    public function keys()
+    {
+        return new static($this->wye, array_keys($this->items));
+    }
+
+    /**
      * Retrieve the last item in the collection, or the last item that matches
      * the criteria defined in a function. When matching by a function, a
      * default value may be set if no results are found.

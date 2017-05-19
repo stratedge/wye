@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Mock for the `PDOStatement::bindValue()` method
-- Inspect parameter/value bindings on executed statements
+- Inspect parameter, value, and data type bindings on executed statements
 - CHANGELOG.md
 
 ### Changed
@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mock for the `PDOStatement::rowCount()` method
 - Return count of rows associated to a result
 - Override and set the count of rows for a specific result
-- Support for PHP 5.1
+- Support for PHP 7.1
 
 ### Changed
 - Drop support for PHP 5.5

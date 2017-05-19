@@ -219,7 +219,7 @@ Definitions:
 
 - Implement `bindColumn` method
 - Implement `bindParam` method
-- Implement `bindValue` method
+- ~~Implement `bindValue` method~~
 - Implement `closeCursor` method
 - Implement `columnCount` method
 - Implement `debugDumpParams` method

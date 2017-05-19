@@ -2,16 +2,13 @@
 
 namespace Stratedge\Wye\Collections;
 
-use ArrayAccess;
 use ArrayIterator;
-use Countable;
 use InvalidArgumentException;
-use IteratorAggregate;
 use Stratedge\Wye\Traits\UsesWye;
 use Stratedge\Wye\Wye;
 use Traversable;
 
-class Collection implements ArrayAccess, Countable, IteratorAggregate
+class Collection implements CollectionInterface
 {
     use UsesWye;
 

@@ -189,6 +189,7 @@ Definitions:
 ### General
 
 - Phase out the "smart" getters and setters
+- Fetch mode should be an object in PDOStatement
 
 ### Stratedge\Wye\Wye
 

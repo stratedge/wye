@@ -49,11 +49,6 @@ class PDOStatement extends BasePDOStatement
     protected $options;
 
     /**
-     * @var array
-     */
-    protected $params = [];
-
-    /**
      * @var Result
      */
     protected $result;
@@ -283,32 +278,6 @@ class PDOStatement extends BasePDOStatement
     public function setOptions($options)
     {
         $this->options = $options;
-        return $this;
-    }
-
-
-
-    //**************************************************************************
-    // PARAMS
-    //**************************************************************************
-
-    public function params($params = null)
-    {
-        if (is_null($params)) {
-            return $this->getParams();
-        } else {
-            return $this->setParams($params);
-        }
-    }
-
-    public function getParams()
-    {
-        return $this->params;
-    }
-
-    public function setParams(array $params)
-    {
-        $this->params = $params;
         return $this;
     }
 

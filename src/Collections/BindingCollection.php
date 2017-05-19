@@ -2,6 +2,7 @@
 
 namespace Stratedge\Wye\Collections;
 
+use PDO;
 use Stratedge\Wye\Binding;
 use Stratedge\Wye\Wye;
 
@@ -16,6 +17,36 @@ class BindingCollection extends Collection
     public function __construct(Wye $wye, $items = [])
     {
         parent::__construct($wye, $items, Binding::class);
+    }
+
+    /**
+     * Create a new collection with only bindings with a given data type.
+     *
+     * @param  int               $data_type
+     * @return BindingCollection
+     */
+    public function filterByDataType($data_type)
+    {
+        $callback = function (Binding $binding, $key) use ($data_type) {
+            switch ($data_type) {
+                case PDO::PARAM_BOOL:
+                    return $binding->isBoolean();
+                case PDO::PARAM_NULL:
+                    return $binding->isNull();
+                case PDO::PARAM_INT:
+                    return $binding->isInteger();
+                case PDO::PARAM_STR:
+                    return $binding->isString();
+                case PDO::PARAM_LOB:
+                    return $binding->isLargeObject();
+                case PDO::PARAM_STMT:
+                    return $binding->isStatement();
+                case PDO::PARAM_INPUT_OUTPUT:
+                    return $binding->isInputOutput();
+            }
+        };
+
+        return $this->filter($callback);
     }
 
     /**

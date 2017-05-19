@@ -248,6 +248,17 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
         return $this;
     }
 
+    /**
+     * Return a new collection with the same item values but the keys converted
+     * to consecutive integers.
+     *
+     * @return Collection
+     */
+    public function values()
+    {
+        return new static($this->wye, array_values($this->items));
+    }
+
     //**************************************************************************
     // ARRAY ACCESS
     //**************************************************************************

@@ -4,6 +4,7 @@ namespace Stratedge\Wye\Collections;
 
 use PDO;
 use Stratedge\Wye\Binding;
+use Stratedge\Wye\BindingInterface;
 use Stratedge\Wye\Wye;
 
 class BindingCollection extends Collection implements BindingCollectionInterface
@@ -16,7 +17,7 @@ class BindingCollection extends Collection implements BindingCollectionInterface
      */
     public function __construct(Wye $wye, $items = [])
     {
-        parent::__construct($wye, $items, Binding::class);
+        parent::__construct($wye, $items, BindingInterface::class);
     }
 
     /**
@@ -27,7 +28,7 @@ class BindingCollection extends Collection implements BindingCollectionInterface
      */
     public function filterByDataType($data_type)
     {
-        $callback = function (Binding $binding, $key) use ($data_type) {
+        $callback = function (BindingInterface $binding, $key) use ($data_type) {
             switch ($data_type) {
                 case PDO::PARAM_BOOL:
                     return $binding->isBoolean();
@@ -58,7 +59,7 @@ class BindingCollection extends Collection implements BindingCollectionInterface
      */
     public function filterByParameter($parameter)
     {
-        $callback = function (Binding $binding, $key) use ($parameter) {
+        $callback = function (BindingInterface $binding, $key) use ($parameter) {
             return $binding->getParameter() == $parameter;
         };
 
@@ -74,7 +75,7 @@ class BindingCollection extends Collection implements BindingCollectionInterface
      */
     public function filterByValue($value)
     {
-        $callback = function (Binding $binding, $key) use ($value) {
+        $callback = function (BindingInterface $binding, $key) use ($value) {
             return $binding->getValue() == $value;
         };
 
@@ -90,7 +91,7 @@ class BindingCollection extends Collection implements BindingCollectionInterface
      */
     public function filterByValueLike($value)
     {
-        $callback = function (Binding $binding, $key) use ($value) {
+        $callback = function (BindingInterface $binding, $key) use ($value) {
             return strpos($binding->getValue(), $value) !== false;
         };
 

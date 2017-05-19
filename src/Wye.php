@@ -3,15 +3,11 @@
 namespace Stratedge\Wye;
 
 use Exception;
-use Stratedge\Wye\Binding;
 use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
-use Stratedge\Wye\Result;
-use Stratedge\Wye\Row;
-use Stratedge\Wye\Transaction;
 
 class Wye
 {
@@ -124,10 +120,10 @@ class Wye
     /**
      * Creates a new instance of Stratedge\Wye\Binding.
      *
-     * @param  int|string $parameter
-     * @param  mixed      $value
-     * @param  int        $data_type
-     * @return Binding
+     * @param  int|string       $parameter
+     * @param  mixed            $value
+     * @param  int              $data_type
+     * @return BindingInterface
      */
     public static function makeBinding(
         $parameter,

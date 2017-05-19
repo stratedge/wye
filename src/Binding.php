@@ -7,7 +7,7 @@ use PDO;
 use Stratedge\Wye\Traits\UsesWye;
 use Stratedge\Wye\Wye;
 
-class Binding
+class Binding implements BindingInterface
 {
     use UsesWye;
 
@@ -217,7 +217,7 @@ class Binding
     /**
      * Determine if the data_type property represents a large object value.
      *
-     * @see Binding::isLOB()
+     * @see self::isLOB()
      *
      * @return boolean
      */
@@ -240,7 +240,7 @@ class Binding
     /**
      * Determine if the data_type property represents a statement value.
      *
-     * @see Binding::isStatement()
+     * @see self::isStatement()
      *
      * @return boolean
      */

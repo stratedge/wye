@@ -91,6 +91,18 @@ class BindingCollection extends Collection
     }
 
     /**
+     * Determines if the given value is contained in any values in any of the
+     * bindings in the collection.
+     *
+     * @param  mixed   $value
+     * @return boolean
+     */
+    public function hasValueLike($value)
+    {
+        return $this->filterByValueLike($value)->isNotEmpty();
+    }
+
+    /**
      * Rebuilds the contents of the collection based on the provided array. Keys
      * become binding parameters and values are used for binding values.
      * 0-indexed numerical-keyed arrays are shifted once to begin with 1.

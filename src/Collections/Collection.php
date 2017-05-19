@@ -105,6 +105,26 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Create a new collection containing the items of the original collection
+     * that pass the given callback. When no callback is provided, falsey values
+     * are removed.
+     *
+     * @param  callable|null $callback
+     * @return Collection
+     */
+    public function filter(callable $callback = null)
+    {
+        if (!is_null($callback)) {
+            return new static(
+                $this->wye,
+                array_filter($this->items, $callback, ARRAY_FILTER_USE_BOTH)
+            );
+        }
+
+        return new static($this->wye, array_filter($this->items));
+    }
+
+    /**
      * Retrieve the first item in the collection, or the first item that matches
      * the criteria defined in a function. When matching by a function, a
      * default value may be set if no results are found.

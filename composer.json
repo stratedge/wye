@@ -1,7 +1,23 @@
 {
     "name": "stratedge/wye",
-    "description": "A library for mocking native PDO connections and query results",
+    "description": "A library that makes unit testing database-driven code in PHP a breeze. Mock the native PDO class, define query results, and inspect executed statements.",
     "type": "library",
+    "keywords": [
+        "database",
+        "mock",
+        "mocking",
+        "mysql",
+        "pdo",
+        "phpunit",
+        "replacement",
+        "test",
+        "testing",
+        "unit",
+        "unit-test",
+        "unit-testing",
+        "unittest"
+    ],
+    "homepage": "https://github.com/stratedge/wye",
     "license": "MIT",
     "authors": [
         {
@@ -9,6 +25,11 @@
             "email": "jarret@solvomedia.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/stratedge/wye/issues",
+        "wiki": "https://github.com/stratedge/wye/wiki",
+        "docs": "https://github.com/stratedge/wye/wiki"
+    },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.6"
@@ -19,7 +40,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Stratedge\\Wye\\": "src/",
+            "Stratedge\\Wye\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Tests\\": "tests/"
         }
     }

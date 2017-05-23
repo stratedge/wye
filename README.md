@@ -65,7 +65,7 @@ $this->assertSame(1, Wye::getNumQueries());
 ```
 
 > **<u>WAIT, THERE'S MORE</u>**  
-> For a much more in-depth look at Wye' usage, check out the extensive documentation, especially the section on [Basic Usage](https://github.com/stratedge/wye/wiki/Introduction#basic-usage).
+> For a much more in-depth look at Wye's usage, check out the extensive documentation, especially the section on [Basic Usage](https://github.com/stratedge/wye/wiki/Introduction#basic-usage).
 
 # Documentation
 

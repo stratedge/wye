@@ -5,12 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+- No pending changes
+
+## [0.3.0] - 2017-05-23
 ### Added
 - Mock for the `PDOStatement::bindValue()` method
 - Inspect parameter, value, and data type bindings on executed statements
 - CHANGELOG.md
 
 ### Changed
+- Move documentation from README.md to Github wiki - [https://github.com/stratedge/wye/wiki](https://github.com/stratedge/wye/wiki)
 - Remove the `params` property from `Stratedge\Wye\PDO\PDOStatement`
 - Remove `params` method from `Stratedge\Wye\PDO\PDOStatement`
 - Remove `getParams` method from `Stratedge\Wye\PDO\PDOStatement`
@@ -46,5 +51,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mock for the `PDO::prepare()` method
 - Mock for the `PDO::quote()` method
 
-[Unreleased]: https://github.com/stratedge/wye/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/stratedge/wye/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/stratedge/wye/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/stratedge/wye/compare/v0.1.0...v0.2.0

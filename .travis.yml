@@ -5,4 +5,5 @@ php:
   - 7.1
   - nightly
 install:
+  - composer self-update --snapshot
   - composer install -vvv

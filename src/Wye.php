@@ -229,6 +229,28 @@ class Wye
     }
 
 
+    /**
+     * Marks the current transaction as committed and removes Wye from
+     * transaction mode. If no transaction exists, throws a PDOException.
+     *
+     * @todo Flesh out the details for the PDOException properly.
+     *
+     * @throws PDOException
+     *
+     * @return void
+     */
+    public static function commitTransaction()
+    {
+        if (static::getInTransaction() !== true) {
+            throw new PDOException();
+        }
+
+        static::setInTransaction(false);
+
+        static::currentTransaction()->setCommitted(true);
+    }
+
+
 
     //**************************************************************************
     // STATEMENTS

@@ -84,6 +84,31 @@ class Transaction
     }
 
 
+    //**************************************************************************
+    // ROLLED_BACK
+    //**************************************************************************
+
+    /**
+     * Returns the value of the rolled_back property.
+     *
+     * @return boolean
+     */
+    public function getRolledBack()
+    {
+        return $this->rolled_back;
+    }
+
+    /**
+     * Sets the value of the rolled_back property.
+     *
+     * @param boolean $rolled_back
+     */
+    public function setRolledBack($rolled_back)
+    {
+        $this->rolled_back = (bool) $rolled_back;
+    }
+
+
 
     //**************************************************************************
     // STATEMENTS

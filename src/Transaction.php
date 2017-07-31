@@ -17,6 +17,11 @@ class Transaction
     protected $committed = false;
 
     /**
+     * @var boolean
+     */
+    protected $rolled_back = false;
+
+    /**
      * @var array
      */
     protected $statements = [];

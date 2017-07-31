@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- No pending changes
+### Added
+- Mock for the `PDO::commit()` method
+- Mock for the `PDO::rollBack()` method
+- `rolled_back` property to `Stratedge\Wye\Transaction`
+- `getRolledBack()` method to `Stratedge\Wye\Transaction`
+- `setRolledBack()` method to `Stratedge\Wye\Transaction`
 
 ## [0.3.0] - 2017-05-23
 ### Added
@@ -17,9 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Move documentation from README.md to Github wiki - [https://github.com/stratedge/wye/wiki](https://github.com/stratedge/wye/wiki)
 - Remove the `params` property from `Stratedge\Wye\PDO\PDOStatement`
-- Remove `params` method from `Stratedge\Wye\PDO\PDOStatement`
-- Remove `getParams` method from `Stratedge\Wye\PDO\PDOStatement`
-- Remove `setParams` method from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `params()` method from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `getParams()` method from `Stratedge\Wye\PDO\PDOStatement`
+- Remove `setParams()` method from `Stratedge\Wye\PDO\PDOStatement`
 - Drop support for HHVM <= 3.6
 
 ## [0.2.0] - 2017-05-02

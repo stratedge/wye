@@ -12,9 +12,14 @@ class Transaction
     protected $index;
 
     /**
-     * @var committed
+     * @var boolean
      */
     protected $committed = false;
+
+    /**
+     * @var boolean
+     */
+    protected $rolled_back = false;
 
     /**
      * @var array
@@ -76,6 +81,31 @@ class Transaction
     public function setCommitted($committed)
     {
         $this->committed = (bool) $committed;
+    }
+
+
+    //**************************************************************************
+    // ROLLED_BACK
+    //**************************************************************************
+
+    /**
+     * Returns the value of the rolled_back property.
+     *
+     * @return boolean
+     */
+    public function getRolledBack()
+    {
+        return $this->rolled_back;
+    }
+
+    /**
+     * Sets the value of the rolled_back property.
+     *
+     * @param boolean $rolled_back
+     */
+    public function setRolledBack($rolled_back)
+    {
+        $this->rolled_back = (bool) $rolled_back;
     }
 
 

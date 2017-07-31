@@ -10,7 +10,7 @@ use Stratedge\Wye\Wye;
 
 /**
  * @todo
- *   - Implement the `commit` method
+ *   - Finish the `commit` method
  *   - Implement the `errorCode` method
  *   - Implement the `errorInfo` method
  *   - Implement the `exec` method
@@ -19,7 +19,7 @@ use Stratedge\Wye\Wye;
  *   - Implement the `inTransaction` method
  *   - Finish the `lastInsertId` method
  *   - Implement the `query` method
- *   - Implement the `rollBack` method
+ *   - Finish the `rollBack` method
  *   - Implement the `setAttribute` method
  */
 class PDO extends BasePDO
@@ -49,6 +49,21 @@ class PDO extends BasePDO
     public function beginTransaction()
     {
         Wye::beginTransaction();
+
+        return true;
+    }
+
+    /**
+     * Mimic for PDO::commit(). Commits the currently active transaction, or
+     * throws a PDOException if no transaction exists.
+     *
+     * @todo Allow false to be returned.
+     *
+     * @return true
+     */
+    public function commit()
+    {
+        $this->getWye()->commitTransaction();
 
         return true;
     }
@@ -107,5 +122,20 @@ class PDO extends BasePDO
         }
 
         return $this->wye()->quote($string);
+    }
+
+    /**
+     * Mimic for PDO::rollBack(). Rolls back the currently active transaction,
+     * or throws a PDOException if no transaction exists.
+     *
+     * @todo Allow false to be returned.
+     *
+     * @return true
+     */
+    public function rollBack()
+    {
+        $this->getWye()->rollBackTransaction();
+
+        return true;
     }
 }

@@ -12,7 +12,7 @@ class Transaction
     protected $index;
 
     /**
-     * @var committed
+     * @var boolean
      */
     protected $committed = false;
 

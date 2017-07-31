@@ -250,6 +250,27 @@ class Wye
         static::currentTransaction()->setCommitted(true);
     }
 
+    /**
+     * Marks the current transaction as rolled back and removes Wye from
+     * transaction mode. If no transaction exists, throws a PDOException.
+     *
+     * @todo Flesh out the details for the PDOException properly.
+     *
+     * @throws PDOException
+     *
+     * @return void
+     */
+    public static function rollBackTransaction()
+    {
+        if (static::getInTransaction() !== true) {
+            throw new PDOException();
+        }
+
+        static::setInTransaction(false);
+
+        static::currentTransaction()->setRolledBack(true);
+    }
+
 
 
     //**************************************************************************

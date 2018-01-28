@@ -69,6 +69,21 @@ class PDO extends BasePDO
     }
 
     /**
+     * Mimic for PDO::exec(). Executes the provided query.
+     *
+     * @param  string $query
+     * @return int
+     */
+    public function exec($query)
+    {
+        $stmt = $this->getWye()->makeStatement($query, []);
+
+        $stmt->execute();
+
+        return $stmt->rowCount() !== null ? $stmt->rowCount() : 0;
+    }
+
+    /**
      * Mimic for PDO::lastInsertId(). Returns the last insert ID value for the
      * last used statement result.
      *

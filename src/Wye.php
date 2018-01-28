@@ -329,15 +329,6 @@ class Wye
     // RESULTS
     //**************************************************************************
 
-    public static function results($results = null)
-    {
-        if (is_null($results)) {
-            return static::getResults();
-        } else {
-            return static::setResults($results);
-        }
-    }
-
     public static function getResults()
     {
         return static::$results;
@@ -345,7 +336,7 @@ class Wye
 
     public static function getResultAt($index = 0)
     {
-        $results = static::results();
+        $results = static::getResults();
 
         return !empty($results[$index]) ? $results[$index] : null;
     }
@@ -363,11 +354,12 @@ class Wye
     public static function addResult($result)
     {
         //Add result
-        $results = static::results();
+        $results = static::getResults();
         $results[] = $result;
 
         //Store results
-        static::results($results);
+        static::setResults($results);
+        static::setResults($results);
     }
 
 

@@ -170,7 +170,7 @@ class Wye
                 ->hydrateFromArray($params);
         }
 
-        $result = static::getResultAt(static::numQueries());
+        $result = static::getOrCreateResultAt(static::numQueries());
 
         //Add the result to the statement
         $statement->result($result);
@@ -329,15 +329,6 @@ class Wye
     // RESULTS
     //**************************************************************************
 
-    public static function results($results = null)
-    {
-        if (is_null($results)) {
-            return static::getResults();
-        } else {
-            return static::setResults($results);
-        }
-    }
-
     public static function getResults()
     {
         return static::$results;
@@ -345,9 +336,27 @@ class Wye
 
     public static function getResultAt($index = 0)
     {
-        $results = static::results();
+        $results = static::getResults();
 
         return !empty($results[$index]) ? $results[$index] : null;
+    }
+
+    /**
+     * Retrieve a result at a specific index. If no result is found, a new,
+     * blank result will be generated, stored at the index, and returned.
+     *
+     * @param  integer $index
+     * @return Result
+     */
+    public static function getOrCreateResultAt($index = 0)
+    {
+        $results = static::getResultAt($index);
+
+        if (is_null($results)) {
+            $results = static::makeResult()->attachAtIndex($index);
+        }
+
+        return $results;
     }
 
     public static function setResults($results)
@@ -360,14 +369,31 @@ class Wye
         static::setResults([]);
     }
 
-    public static function addResult($result)
+    public static function addResult(Result $result)
     {
-        //Add result
-        $results = static::results();
+        // Add result
+        $results = static::getResults();
         $results[] = $result;
 
-        //Store results
-        static::results($results);
+        // Store results
+        static::setResults($results);
+    }
+
+    /**
+     * Attach a result at a specific index. If a result already exists the
+     * current one will be replaced with the new one.
+     *
+     * @param Result  $result
+     * @param integer $index
+     */
+    public static function addResultAtIndex(Result $result, $index)
+    {
+        // Add result
+        $results = static::getResults();
+        $results[$index] = $result;
+
+        // Store results
+        static::setResults($results);
     }
 
 

@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Results can be attached at a specific index instead of always appending
 
-- No pending changes
+### Changed
+- Queries run without a corresponding result will get a new, empty result
+- Move unit tests into `/tests/Unit` directory
 
 ## [0.5.0] - 2018-01-28
 ### Added

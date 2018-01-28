@@ -277,9 +277,32 @@ class Result
         return $this;
     }
 
+    /**
+     * Append this result to the list of results.
+     *
+     * @return self
+     */
     public function attach()
     {
         $this->wye()->addResult($this);
+        return $this;
+    }
+
+    /**
+     * Attach this result at the specified index. Without an index the result
+     * will be appended to the list of results.
+     *
+     * @param  integer|null $index
+     * @return self
+     */
+    public function attachAtIndex($index = null)
+    {
+        if (is_null($index)) {
+            return $this->attach();
+        }
+
+        $this->getWye()->addResultAtIndex($this, $index);
+
         return $this;
     }
 }

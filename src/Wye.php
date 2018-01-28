@@ -377,6 +377,22 @@ class Wye
 
         //Store results
         static::setResults($results);
+    }
+
+    /**
+     * Attach a result at a specific index. If a result already exists the
+     * current one will be replaced with the new one.
+     *
+     * @param Result  $result
+     * @param integer $index
+     */
+    public static function addResultAtIndex(Result $result, $index)
+    {
+        // Add result
+        $results = static::getResults();
+        $results[$index] = $result;
+
+        // Store results
         static::setResults($results);
     }
 

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Results can be attached at a specific index instead of always appending
 
 ### Changed
+- Queries run without a corresponding result will get a new, empty result
 - Move unit tests into `/tests/Unit` directory
 
 ## [0.5.0] - 2018-01-28

@@ -170,7 +170,7 @@ class Wye
                 ->hydrateFromArray($params);
         }
 
-        $result = static::getResultAt(static::numQueries());
+        $result = static::getOrCreateResultAt(static::numQueries());
 
         //Add the result to the statement
         $statement->result($result);
@@ -369,13 +369,13 @@ class Wye
         static::setResults([]);
     }
 
-    public static function addResult($result)
+    public static function addResult(Result $result)
     {
-        //Add result
+        // Add result
         $results = static::getResults();
         $results[] = $result;
 
-        //Store results
+        // Store results
         static::setResults($results);
     }
 

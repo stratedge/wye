@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - No pending changes
 
+## [0.5.0] - 2018-01-28
+### Added
+- Mock for the `PDO::exec()` method
+
 ## [0.4.0] - 2017-07-30
 ### Added
 - Mock for the `PDO::commit()` method
@@ -59,7 +63,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mock for the `PDO::prepare()` method
 - Mock for the `PDO::quote()` method
 
-[Unreleased]: https://github.com/stratedge/wye/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/stratedge/wye/compare/v0.5.0...HEAD
+[0.4.0]: https://github.com/stratedge/wye/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/stratedge/wye/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stratedge/wye/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/stratedge/wye/compare/v0.1.0...v0.2.0

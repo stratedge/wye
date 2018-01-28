@@ -341,6 +341,24 @@ class Wye
         return !empty($results[$index]) ? $results[$index] : null;
     }
 
+    /**
+     * Retrieve a result at a specific index. If no result is found, a new,
+     * blank result will be generated, stored at the index, and returned.
+     *
+     * @param  integer $index
+     * @return Result
+     */
+    public static function getOrCreateResultAt($index = 0)
+    {
+        $results = static::getResultAt($index);
+
+        if (is_null($results)) {
+            $results = static::makeResult()->attachAtIndex($index);
+        }
+
+        return $results;
+    }
+
     public static function setResults($results)
     {
         static::$results = $results;

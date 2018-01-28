@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+- No pending changes
+
+## [0.6.0] - 2018-01-28
 ### Added
 - Results can be attached at a specific index instead of always appending
 
@@ -67,8 +71,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mock for the `PDO::prepare()` method
 - Mock for the `PDO::quote()` method
 
-[Unreleased]: https://github.com/stratedge/wye/compare/v0.5.0...HEAD
-[0.4.0]: https://github.com/stratedge/wye/compare/v0.4.0...v0.5.0
+[Unreleased]: https://github.com/stratedge/wye/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/stratedge/wye/compare/v0.5.0...v0.6.0
+[0.5.0]: https://github.com/stratedge/wye/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/stratedge/wye/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/stratedge/wye/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/stratedge/wye/compare/v0.1.0...v0.2.0

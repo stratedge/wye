@@ -231,6 +231,21 @@ class Collection implements CollectionInterface
     }
 
     /**
+     * Run a map over each of the items.
+     *
+     * @param  callable  $callback
+     * @return static
+     */
+    public function map(callable $callback)
+    {
+        $keys = array_keys($this->items);
+
+        $items = array_map($callback, $this->items, $keys);
+
+        return new static($this->getWye(), array_combine($keys, $items));
+    }
+
+    /**
      * Remove the last item in the collection and return it.
      *
      * @return mixed

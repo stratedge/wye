@@ -36,7 +36,7 @@ class Collection implements CollectionInterface
      * @param string|null $type  What type of items the collection will hold.
      *     Either a value returned by gettype() or a fully qualified class name.
      */
-    public function __construct(Wye $wye, $items = [], $type = null)
+    public function __construct(Wye $wye, array $items = [], $type = null)
     {
         $this->setWye($wye);
 

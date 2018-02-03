@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Backtrace container property to the PDOStatement class
 - Backtrace logging options to the Wye container
 
 ## [0.6.0] - 2018-01-28

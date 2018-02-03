@@ -5,6 +5,7 @@ namespace Stratedge\Wye;
 use Exception;
 use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
+use Stratedge\Wye\Collections\Collection;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
@@ -127,7 +128,6 @@ class Wye
         return $transaction;
     }
 
-
     /**
      * Creates a new instance of Stratedge\Wye\Binding.
      *
@@ -151,10 +151,21 @@ class Wye
      * @param  array $items
      * @return BindingCollectionInterface
      */
-    public static function makeBindingCollection($items = [])
+    public static function makeBindingCollection(array $items = [])
     {
         $collection = new BindingCollection(new static, $items);
         return $collection;
+    }
+
+    /**
+     * Creates a new instance of CollectionInterface.
+     *
+     * @param  array $items
+     * @return CollectionInterface
+     */
+    public static function makeCollection(array $items = [])
+    {
+        return new Collection(new static, $items);
     }
 
 

@@ -12,7 +12,7 @@ class GetBacktraceTest extends \Tests\TestCase
 
         $this->assertNull($stmt->getBacktrace());
 
-        $collection = Wye::makeCollection();
+        $collection = Wye::makeBacktraceCollection();
 
         $stmt->setBacktrace($collection);
 

@@ -4,8 +4,8 @@ namespace Stratedge\Wye\PDO;
 
 use PDOStatement as BasePDOStatement;
 use RuntimeException;
+use Stratedge\Wye\Collections\BacktraceCollectionInterface;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
-use Stratedge\Wye\Collections\CollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\Result;
 use Stratedge\Wye\Traits\UsesWye;
@@ -64,7 +64,7 @@ class PDOStatement extends BasePDOStatement
     protected $transaction;
 
     /**
-     * @var CollectionInterface|null
+     * @var BacktraceCollectionInterface|null
      */
     protected $backtrace;
 
@@ -227,7 +227,7 @@ class PDOStatement extends BasePDOStatement
     /**
      * Retrieve the value of the backtrace property.
      *
-     * @return CollectionInterface|null
+     * @return BacktraceCollectionInterface|null
      */
     public function getBacktrace()
     {
@@ -237,10 +237,10 @@ class PDOStatement extends BasePDOStatement
     /**
      * Set the value of the backtrace property.
      *
-     * @param  CollectionInterface $backtrace
+     * @param  BacktraceCollectionInterface $backtrace
      * @return self
      */
-    public function setBacktrace(CollectionInterface $backtrace)
+    public function setBacktrace(BacktraceCollectionInterface $backtrace)
     {
         $this->backtrace = $backtrace;
 

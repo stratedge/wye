@@ -12,7 +12,7 @@ class SetBacktraceTest extends \Tests\TestCase
 
         $this->assertNull($stmt->getBacktrace());
 
-        $collection = Wye::makeCollection();
+        $collection = Wye::makeBacktraceCollection();
 
         $stmt->setBacktrace($collection);
 
@@ -23,7 +23,7 @@ class SetBacktraceTest extends \Tests\TestCase
     {
         $stmt = Wye::makeStatement('SELECT * FROM table_name', []);
 
-        $collection = Wye::makeCollection();
+        $collection = Wye::makeBacktraceCollection();
 
         $this->assertSame($stmt, $stmt->setBacktrace($collection));
     }

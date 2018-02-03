@@ -71,4 +71,26 @@ class ResetTest extends TestCase
 
         $this->assertAttributeSame([], "transactions", Wye::class);
     }
+
+    public function testBacktraceSingleResetToFalse()
+    {
+        Wye::logBacktraceForTest();
+
+        $this->assertTrue(Wye::getBacktraceSingle());
+
+        Wye::reset();
+
+        $this->assertFalse(Wye::getBacktraceSingle());
+    }
+
+    public function testBacktraceAllNotResetToFalse()
+    {
+        Wye::logBacktraceForAllTests();
+
+        $this->assertTrue(Wye::getBacktraceAll());
+
+        Wye::reset();
+
+        $this->assertTrue(Wye::getBacktraceAll());
+    }
 }

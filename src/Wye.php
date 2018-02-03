@@ -41,6 +41,16 @@ class Wye
      */
     protected static $transactions = [];
 
+    /**
+     * @var bool
+     */
+    protected static $backtrace_all = false;
+
+    /**
+     * @var bool
+     */
+    protected static $backtrace_single = false;
+
 
     /**
      * Resets all the static properties so that a new test can be run with fresh
@@ -56,6 +66,7 @@ class Wye
         static::resetQuotes();
         static::resetInTransaction();
         static::resetTransactions();
+        static::resetBacktraceForTest();
     }
 
 
@@ -269,6 +280,81 @@ class Wye
         static::setInTransaction(false);
 
         static::currentTransaction()->setRolledBack(true);
+    }
+
+
+    //**************************************************************************
+    // BACKTRACE
+    //**************************************************************************
+
+    /**
+     * Retrieve the value of the backtrace-all property.
+     *
+     * @return bool
+     */
+    public static function getBacktraceAll()
+    {
+        return static::$backtrace_all;
+    }
+
+    /**
+     * Retrieve the value of the backtrace-single property.
+     *
+     * @return bool
+     */
+    public static function getBacktraceSingle()
+    {
+        return static::$backtrace_single;
+    }
+
+    /**
+     * Turn on backtrace logging for all the tests that run, ignoring resets.
+     *
+     * @return void
+     */
+    public static function logBacktraceForAllTests()
+    {
+        static::$backtrace_all = true;
+    }
+
+    /**
+     * Turn on backtrace logging for all the current test only.
+     *
+     * @return void
+     */
+    public static function logBacktraceForTest()
+    {
+        static::$backtrace_single = true;
+    }
+
+    /**
+     * Turn off backtrace logging for all tests.
+     *
+     * @return void
+     */
+    public static function resetBacktraceForAllTests()
+    {
+        static::$backtrace_all = false;
+    }
+
+    /**
+     * Turn off backtrace logging for a single test.
+     *
+     * @return void
+     */
+    public static function resetBacktraceForTest()
+    {
+        static::$backtrace_single = false;
+    }
+
+    /**
+     * Determine if backtrace logging is on or off at the time of call.
+     *
+     * @return bool
+     */
+    public static function shouldLogBacktrace()
+    {
+        return static::$backtrace_all || static::$backtrace_single;
     }
 
 

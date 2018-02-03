@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- `BacktraceCollection` class to contain backtrace logs
 - `Collection::map()` method
 - Backtrace container property to the PDOStatement class
 - Backtrace logging options to the Wye container

@@ -3,6 +3,8 @@
 namespace Stratedge\Wye;
 
 use Exception;
+use Stratedge\Wye\Collections\BacktraceCollection;
+use Stratedge\Wye\Collections\BacktraceCollectionInterface;
 use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\Collections\Collection;
@@ -143,6 +145,17 @@ class Wye
     ) {
         $binding = new Binding(new static, $parameter, $value, $data_type);
         return $binding;
+    }
+
+    /**
+     * Creates a new instance of BacktraceCollectionInterface.
+     *
+     * @param  array  $items
+     * @return BacktraceCollectionInterface
+     */
+    public static function makeBacktraceCollection(array $items = [])
+    {
+        return new BacktraceCollection(new static, $items);
     }
 
     /**

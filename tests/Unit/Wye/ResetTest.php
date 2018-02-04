@@ -93,4 +93,26 @@ class ResetTest extends TestCase
 
         $this->assertTrue(Wye::getBacktraceAll());
     }
+
+    public function testBacktraceLimitResetToNull()
+    {
+        Wye::setBacktraceLimit(12);
+
+        $this->assertSame(12, Wye::getBacktraceLimit());
+
+        Wye::reset();
+
+        $this->assertNull(Wye::getBacktraceLimit());
+    }
+
+    public function testBacktraceDefaultLimitNotReset()
+    {
+        Wye::setBacktraceDefaultLimit(12);
+
+        $this->assertSame(12, Wye::getBacktraceDefaultLimit());
+
+        Wye::reset();
+
+        $this->assertSame(12, Wye::getBacktraceDefaultLimit());
+    }
 }

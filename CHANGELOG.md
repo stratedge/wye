@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Backtrace limiting options, including a default and per-test
 - `BacktraceCollection` class to contain backtrace logs
 - `Collection::map()` method
 - Backtrace container property to the PDOStatement class

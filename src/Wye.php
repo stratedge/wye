@@ -54,6 +54,16 @@ class Wye
      */
     protected static $backtrace_single = false;
 
+    /**
+     * @var int
+     */
+    protected static $backtrace_default_limit = 0;
+
+    /**
+     * @var int|null
+     */
+    protected static $backtrace_limit = null;
+
 
     /**
      * Resets all the static properties so that a new test can be run with fresh
@@ -70,6 +80,7 @@ class Wye
         static::resetInTransaction();
         static::resetTransactions();
         static::resetBacktraceForTest();
+        static::resetBacktraceLimit();
     }
 
 
@@ -332,6 +343,26 @@ class Wye
     }
 
     /**
+     * Retrieve the value of the backtrace-default-limit property.
+     *
+     * @return int
+     */
+    public static function getBacktraceDefaultLimit()
+    {
+        return static::$backtrace_default_limit;
+    }
+
+    /**
+     * Retrieve the value of the backtrace-limit property.
+     *
+     * @return int|null
+     */
+    public static function getBacktraceLimit()
+    {
+        return static::$backtrace_limit;
+    }
+
+    /**
      * Turn on backtrace logging for all the tests that run, ignoring resets.
      *
      * @return void
@@ -352,6 +383,16 @@ class Wye
     }
 
     /**
+     * Reset the value of the backtrace-default-limit property to 0.
+     *
+     * @return void
+     */
+    public static function resetBacktraceDefaultLimit()
+    {
+        static::$backtrace_default_limit = 0;
+    }
+
+    /**
      * Turn off backtrace logging for all tests.
      *
      * @return void
@@ -369,6 +410,48 @@ class Wye
     public static function resetBacktraceForTest()
     {
         static::$backtrace_single = false;
+    }
+
+    /**
+     * Reset the value of the backtrace-limit property to null.
+     *
+     * @return void
+     */
+    public static function resetBacktraceLimit()
+    {
+        static::$backtrace_limit = null;
+    }
+
+    /**
+     * Determine the backtrace limit that should be applied.
+     *
+     * @return int
+     */
+    public static function resolveBacktraceLimit()
+    {
+        return is_null(static::$backtrace_limit) ?
+            static::$backtrace_default_limit :
+            static::$backtrace_limit;
+    }
+
+    /**
+     * Set the value of the backtrace-default-limit property.
+     *
+     * @param int $limit
+     */
+    public static function setBacktraceDefaultLimit(int $limit)
+    {
+        static::$backtrace_default_limit = $limit;
+    }
+
+    /**
+     * Set the value of the backtrace-limit property.
+     *
+     * @param int $limit
+     */
+    public static function setBacktraceLimit(int $limit)
+    {
+        static::$backtrace_limit = $limit;
     }
 
     /**

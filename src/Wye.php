@@ -228,6 +228,17 @@ class Wye
 
         //Increment number of queries run
         static::incrementNumQueries();
+
+        if (static::shouldLogBacktrace()) {
+            $statement->setBacktrace(
+                static::makeBacktraceCollection(
+                    debug_backtrace(
+                        DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS,
+                        static::resolveBacktraceLimit()
+                    )
+                )
+            );
+        }
     }
 
 

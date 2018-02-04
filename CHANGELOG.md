@@ -6,11 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Backtrace limiting options, including a default and per-test
+- Ability to limit backtrace records logged, with an override-able default
+- Ability to log backtraces for statements run, either for all tests or a single test
 - `BacktraceCollection` class to contain backtrace logs
 - `Collection::map()` method
-- Backtrace container property to the PDOStatement class
-- Backtrace logging options to the Wye container
 
 ## [0.6.0] - 2018-01-28
 ### Added

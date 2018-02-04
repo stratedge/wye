@@ -242,7 +242,7 @@ class Collection implements CollectionInterface
 
         $items = array_map($callback, $this->items, $keys);
 
-        return new static($this->getWye(), array_combine($keys, $items));
+        return $this->getWye()->makeCollection(array_combine($keys, $items));
     }
 
     /**

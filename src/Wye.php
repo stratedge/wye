@@ -3,8 +3,11 @@
 namespace Stratedge\Wye;
 
 use Exception;
+use Stratedge\Wye\Collections\BacktraceCollection;
+use Stratedge\Wye\Collections\BacktraceCollectionInterface;
 use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
+use Stratedge\Wye\Collections\Collection;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
@@ -41,6 +44,26 @@ class Wye
      */
     protected static $transactions = [];
 
+    /**
+     * @var bool
+     */
+    protected static $backtrace_all = false;
+
+    /**
+     * @var bool
+     */
+    protected static $backtrace_single = false;
+
+    /**
+     * @var int
+     */
+    protected static $backtrace_default_limit = 0;
+
+    /**
+     * @var int|null
+     */
+    protected static $backtrace_limit = null;
+
 
     /**
      * Resets all the static properties so that a new test can be run with fresh
@@ -56,6 +79,8 @@ class Wye
         static::resetQuotes();
         static::resetInTransaction();
         static::resetTransactions();
+        static::resetBacktraceForTest();
+        static::resetBacktraceLimit();
     }
 
 
@@ -116,7 +141,6 @@ class Wye
         return $transaction;
     }
 
-
     /**
      * Creates a new instance of Stratedge\Wye\Binding.
      *
@@ -135,15 +159,37 @@ class Wye
     }
 
     /**
+     * Creates a new instance of BacktraceCollectionInterface.
+     *
+     * @param  array  $items
+     * @return BacktraceCollectionInterface
+     */
+    public static function makeBacktraceCollection(array $items = [])
+    {
+        return new BacktraceCollection(new static, $items);
+    }
+
+    /**
      * Creates a new instance of BindingCollectionInterface.
      *
      * @param  array $items
      * @return BindingCollectionInterface
      */
-    public static function makeBindingCollection($items = [])
+    public static function makeBindingCollection(array $items = [])
     {
         $collection = new BindingCollection(new static, $items);
         return $collection;
+    }
+
+    /**
+     * Creates a new instance of CollectionInterface.
+     *
+     * @param  array $items
+     * @return CollectionInterface
+     */
+    public static function makeCollection(array $items = [])
+    {
+        return new Collection(new static, $items);
     }
 
 
@@ -182,6 +228,17 @@ class Wye
 
         //Increment number of queries run
         static::incrementNumQueries();
+
+        if (static::shouldLogBacktrace()) {
+            $statement->setBacktrace(
+                static::makeBacktraceCollection(
+                    debug_backtrace(
+                        DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS,
+                        static::resolveBacktraceLimit()
+                    )
+                )
+            );
+        }
     }
 
 
@@ -269,6 +326,153 @@ class Wye
         static::setInTransaction(false);
 
         static::currentTransaction()->setRolledBack(true);
+    }
+
+
+    //**************************************************************************
+    // BACKTRACE
+    //**************************************************************************
+
+    /**
+     * Retrieve the value of the backtrace-all property.
+     *
+     * @return bool
+     */
+    public static function getBacktraceAll()
+    {
+        return static::$backtrace_all;
+    }
+
+    /**
+     * Retrieve the value of the backtrace-single property.
+     *
+     * @return bool
+     */
+    public static function getBacktraceSingle()
+    {
+        return static::$backtrace_single;
+    }
+
+    /**
+     * Retrieve the value of the backtrace-default-limit property.
+     *
+     * @return int
+     */
+    public static function getBacktraceDefaultLimit()
+    {
+        return static::$backtrace_default_limit;
+    }
+
+    /**
+     * Retrieve the value of the backtrace-limit property.
+     *
+     * @return int|null
+     */
+    public static function getBacktraceLimit()
+    {
+        return static::$backtrace_limit;
+    }
+
+    /**
+     * Turn on backtrace logging for all the tests that run, ignoring resets.
+     *
+     * @return void
+     */
+    public static function logBacktraceForAllTests()
+    {
+        static::$backtrace_all = true;
+    }
+
+    /**
+     * Turn on backtrace logging for all the current test only.
+     *
+     * @return void
+     */
+    public static function logBacktraceForTest()
+    {
+        static::$backtrace_single = true;
+    }
+
+    /**
+     * Reset the value of the backtrace-default-limit property to 0.
+     *
+     * @return void
+     */
+    public static function resetBacktraceDefaultLimit()
+    {
+        static::$backtrace_default_limit = 0;
+    }
+
+    /**
+     * Turn off backtrace logging for all tests.
+     *
+     * @return void
+     */
+    public static function resetBacktraceForAllTests()
+    {
+        static::$backtrace_all = false;
+    }
+
+    /**
+     * Turn off backtrace logging for a single test.
+     *
+     * @return void
+     */
+    public static function resetBacktraceForTest()
+    {
+        static::$backtrace_single = false;
+    }
+
+    /**
+     * Reset the value of the backtrace-limit property to null.
+     *
+     * @return void
+     */
+    public static function resetBacktraceLimit()
+    {
+        static::$backtrace_limit = null;
+    }
+
+    /**
+     * Determine the backtrace limit that should be applied.
+     *
+     * @return int
+     */
+    public static function resolveBacktraceLimit()
+    {
+        return is_null(static::$backtrace_limit) ?
+            static::$backtrace_default_limit :
+            static::$backtrace_limit;
+    }
+
+    /**
+     * Set the value of the backtrace-default-limit property.
+     *
+     * @param int $limit
+     */
+    public static function setBacktraceDefaultLimit($limit)
+    {
+        static::$backtrace_default_limit = $limit;
+    }
+
+    /**
+     * Set the value of the backtrace-limit property.
+     *
+     * @param int $limit
+     */
+    public static function setBacktraceLimit($limit)
+    {
+        static::$backtrace_limit = $limit;
+    }
+
+    /**
+     * Determine if backtrace logging is on or off at the time of call.
+     *
+     * @return bool
+     */
+    public static function shouldLogBacktrace()
+    {
+        return static::$backtrace_all || static::$backtrace_single;
     }
 
 

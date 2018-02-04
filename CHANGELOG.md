@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
-- No pending changes
+### Added
+- Ability to limit backtrace records logged, with an override-able default
+- Ability to log backtraces for statements run, either for all tests or a single test
+- `BacktraceCollection` class to contain backtrace logs
+- `Collection::map()` method
 
 ## [0.6.0] - 2018-01-28
 ### Added

@@ -102,6 +102,14 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
     public function last(callable $callback = null, $default = null);
 
     /**
+     * Run a map over each of the items.
+     *
+     * @param  callable  $callback
+     * @return static
+     */
+    public function map(callable $callback);
+
+    /**
      * Remove the last item in the collection and return it.
      *
      * @return mixed

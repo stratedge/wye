@@ -10,5 +10,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         Wye::reset();
+        Wye::resetBacktraceForAllTests();
+        Wye::resetBacktraceDefaultLimit();
     }
 }

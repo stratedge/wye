@@ -15,7 +15,7 @@ class ResetTest extends TestCase
 
         Wye::reset();
 
-        $this->assertAttributeSame([], "statements", Wye::class);
+        $this->assertSame([], Wye::getStatements()->all());
     }
 
 

@@ -24,10 +24,10 @@ class Row
      */
     public function __construct(Wye $wye, array $data = null)
     {
-        $this->wye($wye);
+        $this->setWye($wye);
 
         if (!is_null($data)) {
-            $this->data($data);
+            $this->setData($data);
         }
     }
 
@@ -82,7 +82,7 @@ class Row
      */
     protected function formatAssoc()
     {
-        return $this->data();
+        return $this->getData();
     }
 
 
@@ -98,7 +98,7 @@ class Row
         $data = [];
         $index = 0;
 
-        foreach ($this->data() as $key => $value) {
+        foreach ($this->getData() as $key => $value) {
             $data[$key] = $value;
             $data[$index] = $value;
             $index++;
@@ -121,7 +121,7 @@ class Row
         $r = new ReflectionClass($class_name);
         $data = $r->newInstanceArgs((array) $ctor_args);
 
-        foreach ($this->data() as $key => $value) {
+        foreach ($this->getData() as $key => $value) {
             $data->$key = $value;
         }
 
@@ -136,7 +136,7 @@ class Row
      */
     protected function formatObj()
     {
-        return (object) $this->data();
+        return (object) $this->getData();
     }
 
 
@@ -144,8 +144,13 @@ class Row
     // DATA
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function data(array $data = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($data)) {
             return $this->getData();
         } else {

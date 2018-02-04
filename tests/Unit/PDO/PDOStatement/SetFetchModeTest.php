@@ -66,7 +66,7 @@ class SetFetchModeTest extends TestCase
 
         $statement->setFetchMode(PDO::FETCH_CLASS, "some_class", ["args" => true]);
 
-        $fetch_mode = $statement->fetchMode();
+        $fetch_mode = $statement->getFetchMode();
 
         $this->assertSame(PDO::FETCH_CLASS, $fetch_mode[0]);
     }
@@ -78,7 +78,7 @@ class SetFetchModeTest extends TestCase
 
         $statement->setFetchMode(PDO::FETCH_CLASS, "some_class", ["args" => true]);
 
-        $fetch_mode = $statement->fetchMode();
+        $fetch_mode = $statement->getFetchMode();
 
         $this->assertSame("some_class", $fetch_mode[1]);
     }
@@ -90,7 +90,7 @@ class SetFetchModeTest extends TestCase
 
         $statement->setFetchMode(PDO::FETCH_CLASS, "some_class", ["args" => true]);
 
-        $fetch_mode = $statement->fetchMode();
+        $fetch_mode = $statement->getFetchMode();
 
         $this->assertSame(["args" => true], $fetch_mode[2]);
     }

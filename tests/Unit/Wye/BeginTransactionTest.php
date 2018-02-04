@@ -39,7 +39,7 @@ class BeginTransactionTest extends TestCase
     {
         Wye::beginTransaction();
 
-        $transactions = Wye::transactions();
+        $transactions = Wye::getTransactions();
 
         $this->assertCount(1, $transactions);
         $this->assertInstanceOf(Transaction::class, $transactions[0]);
@@ -50,8 +50,8 @@ class BeginTransactionTest extends TestCase
     {
         Wye::beginTransaction();
 
-        $transactions = Wye::transactions();
+        $transactions = Wye::getTransactions();
 
-        $this->assertSame(0, $transactions[0]->index());
+        $this->assertSame(0, $transactions[0]->getIndex());
     }
 }

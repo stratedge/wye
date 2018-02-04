@@ -39,8 +39,13 @@ class Transaction
     // INDEX
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function index($index = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($index)) {
             return $this->getIndex();
         } else {
@@ -64,8 +69,13 @@ class Transaction
     // COMMITTED
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function committed($committed = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($committed)) {
             return $this->getCommitted();
         } else {
@@ -114,8 +124,13 @@ class Transaction
     // STATEMENTS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function statements(array $statements = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($statements)) {
             return $this->getStatements();
         } else {
@@ -136,7 +151,7 @@ class Transaction
     public function addStatement(PDOStatement $statement)
     {
         //Add this transation to the statement
-        $statement->transaction($this);
+        $statement->setTransaction($this);
 
         $this->statements[] = $statement;
     }

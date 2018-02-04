@@ -78,13 +78,13 @@ class ExecuteTest extends TestCase
         $statement = Wye::makeStatement("", []);
 
         //Make sure the default is null
-        $this->assertNull($statement->result());
+        $this->assertNull($statement->getResult());
 
         $result = Wye::makeResult()
             ->attach();
 
         $statement->execute();
 
-        $this->assertSame($result, $statement->result());
+        $this->assertSame($result, $statement->getResult());
     }
 }

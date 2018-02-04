@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+- No pending changes
+
+## [0.7.0] - 2018-02-03
 ### Added
 - Ability to limit backtrace records logged, with an override-able default
 - Ability to log backtraces for statements run, either for all tests or a single test
@@ -74,7 +78,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mock for the `PDO::prepare()` method
 - Mock for the `PDO::quote()` method
 
-[Unreleased]: https://github.com/stratedge/wye/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/stratedge/wye/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/stratedge/wye/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/stratedge/wye/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/stratedge/wye/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/stratedge/wye/compare/v0.3.0...v0.4.0

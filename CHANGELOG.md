@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
-- Deprecated smart getters and setters
+- Store executed `PDOStatements` in a `StatementCollection`
+- Deprecate smart getters and setters
 
 ## [0.7.0] - 2018-02-03
 ### Added

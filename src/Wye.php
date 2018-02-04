@@ -8,6 +8,8 @@ use Stratedge\Wye\Collections\BacktraceCollectionInterface;
 use Stratedge\Wye\Collections\BindingCollection;
 use Stratedge\Wye\Collections\BindingCollectionInterface;
 use Stratedge\Wye\Collections\Collection;
+use Stratedge\Wye\Collections\StatementCollection;
+use Stratedge\Wye\Collections\StatementCollectionInterface;
 use Stratedge\Wye\PDO\PDO;
 use Stratedge\Wye\PDO\PDOException;
 use Stratedge\Wye\PDO\PDOStatement;
@@ -15,9 +17,9 @@ use Stratedge\Wye\PDO\PDOStatement;
 class Wye
 {
     /**
-     * @var array
+     * @var StatementCollectionInterface|null
      */
-    protected static $statements = [];
+    protected static $statements;
 
     /**
      * @var array
@@ -190,6 +192,17 @@ class Wye
     public static function makeCollection(array $items = [])
     {
         return new Collection(new static, $items);
+    }
+
+    /**
+     * Creates a new instance of StatementCollectionInterface.
+     *
+     * @param  array  $items
+     * @return StatementCollectionInterface
+     */
+    public static function makeStatementCollection(array $items = [])
+    {
+        return new StatementCollection(new static, $items);
     }
 
 
@@ -495,41 +508,72 @@ class Wye
         }
     }
 
+    /**
+     * Retrieve the value of the statements property.
+     *
+     * @return StatementCollectionInterface
+     */
     public static function getStatements()
     {
+        if (is_null(static::$statements)) {
+            static::resetStatements();
+        }
+
         return static::$statements;
     }
 
-    public static function setStatements($statements)
+    /**
+     * Set the value of the statements property.
+     *
+     * @param  StatementCollectionInterface $statements
+     * @return void
+     */
+    public static function setStatements(StatementCollectionInterface $statements)
     {
         static::$statements = $statements;
     }
 
+    /**
+     * Reset the statements property to an empty collection.
+     *
+     * @return void
+     */
     public static function resetStatements()
     {
-        static::setStatements([]);
+        static::$statements = static::makeStatementCollection();
     }
 
+    /**
+     * Push a new statement onto the collection of statements.
+     *
+     * @param  PDOStatement $statement
+     * @return void
+     */
     public static function addStatement(PDOStatement $statement)
     {
         //Add statement
-        $statements = static::getStatements();
-        $statements[] = $statement;
-
-        //Store statements
-        static::setStatements($statements);
+        static::getStatements()->push($statement);
     }
 
+    /**
+     * Retrieve the latest statement pushed into the collection.
+     *
+     * @return PDOStatement|null
+     */
     public static function getLastStatement()
     {
-        return static::getStatementAtIndex(count(static::getStatements()) - 1);
+        return static::getStatements()->last();
     }
 
+    /**
+     * Retrieve a statement at a specific index.
+     *
+     * @param  int $index
+     * @return PDOStatement|null
+     */
     public static function getStatementAtIndex($index = 0)
     {
-        $statements = static::getStatements();
-
-        return isset($statements[$index]) ? $statements[$index] : null;
+        return static::getStatements()->get($index);
     }
 
 

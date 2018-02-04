@@ -450,7 +450,7 @@ class Wye
      *
      * @param int $limit
      */
-    public static function setBacktraceDefaultLimit(int $limit)
+    public static function setBacktraceDefaultLimit($limit)
     {
         static::$backtrace_default_limit = $limit;
     }
@@ -460,7 +460,7 @@ class Wye
      *
      * @param int $limit
      */
-    public static function setBacktraceLimit(int $limit)
+    public static function setBacktraceLimit($limit)
     {
         static::$backtrace_limit = $limit;
     }

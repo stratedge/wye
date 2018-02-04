@@ -16,8 +16,13 @@ trait UsesWye
     // WYE
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function wye(Wye $wye = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($wye)) {
             return $this->getWye();
         } else {

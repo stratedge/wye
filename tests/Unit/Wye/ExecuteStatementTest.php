@@ -11,13 +11,13 @@ class ExecuteStatementTest extends TestCase
     public function testStatementAddedToListOfStatements()
     {
         //Statements start empty
-        $this->assertEmpty(Wye::statements());
+        $this->assertEmpty(Wye::getStatements());
 
         $statement = Wye::makeStatement("SELECT * FROM `users`", []);
 
         Wye::executeStatement($statement);
 
-        $statements = Wye::statements();
+        $statements = Wye::getStatements();
 
         $this->assertSame($statements[0], $statement);
     }
@@ -64,12 +64,12 @@ class ExecuteStatementTest extends TestCase
         $statement1 = Wye::makeStatement("SELECT * FROM `users`", []);
 
         //Make sure there is no result to start
-        $this->assertEmpty($statement1->result());
+        $this->assertEmpty($statement1->getResult());
 
         $statement2 = Wye::makeStatement("SELECT * FROM `apparatus`", []);
 
         //Make sure there is no result to start
-        $this->assertEmpty($statement2->result());
+        $this->assertEmpty($statement2->getResult());
 
         $result1 = Wye::makeResult()
             ->addRow(["id" => 1, "name" => "Test"])
@@ -82,11 +82,11 @@ class ExecuteStatementTest extends TestCase
 
         Wye::executeStatement($statement1, []);
 
-        $this->assertSame($result1, $statement1->result());
+        $this->assertSame($result1, $statement1->getResult());
 
         Wye::executeStatement($statement2, []);
 
-        $this->assertSame($result2, $statement2->result());
+        $this->assertSame($result2, $statement2->getResult());
     }
 
     public function testNumQueriesIncremented()

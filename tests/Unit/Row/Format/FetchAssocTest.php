@@ -14,7 +14,7 @@ class FetchAssocTest extends TestCase
 
         $this->assertInternalType("array", $row->format(PDO::FETCH_ASSOC));
 
-        $row->data(["id" => 1, "apparatus" => "Ladder 7"]);
+        $row->setData(["id" => 1, "apparatus" => "Ladder 7"]);
 
         $this->assertInternalType("array", $row->format(PDO::FETCH_ASSOC));
     }

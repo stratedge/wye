@@ -14,7 +14,7 @@ class FetchBothTest extends TestCase
 
         $this->assertInternalType("array", $row->format(PDO::FETCH_BOTH));
 
-        $row->data(["id" => 10, "apparatus" => "Engine 12"]);
+        $row->setData(["id" => 10, "apparatus" => "Engine 12"]);
 
         $this->assertInternalType("array", $row->format(PDO::FETCH_BOTH));
     }

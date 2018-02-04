@@ -12,7 +12,7 @@ class LastInsertIdTest extends TestCase
         $pdo = Wye::makePDO();
 
         $result = Wye::makeResult();
-        $result->lastInsertId(5);
+        $result->setLastInsertId(5);
         $result->attach();
 
         $statement = $pdo->prepare('INSERT INTO apparatus');

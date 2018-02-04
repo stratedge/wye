@@ -51,7 +51,7 @@ class Result
      */
     public function __construct(Wye $wye)
     {
-        $this->wye($wye);
+        $this->setWye($wye);
     }
 
 
@@ -67,7 +67,7 @@ class Result
      */
     public function fetch($how, $orientation, $offset)
     {
-        $rows = $this->rows();
+        $rows = $this->getRows();
 
         if (!isset($rows[$this->current_index])) {
             return false;
@@ -94,7 +94,7 @@ class Result
     {
         $result = [];
 
-        foreach ($this->rows() as $row) {
+        foreach ($this->getRows() as $row) {
             $result[] = $row->format($how, $class_name, $ctor_args);
         }
 
@@ -107,8 +107,13 @@ class Result
     // COLUMNS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function columns($columns = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($columns)) {
             return $this->getColumns();
         } else {
@@ -143,13 +148,13 @@ class Result
 
     public function getColumnAtIndex($index = 0)
     {
-        $columns = $this->columns();
+        $columns = $this->getColumns();
         return isset($columns[$index]) ? $columns[$index] : null;
     }
 
     public function countColumns()
     {
-        return count($this->columns());
+        return count($this->getColumns());
     }
 
 
@@ -157,8 +162,13 @@ class Result
     // LAST INSERT ID
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function lastInsertId($id = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($id)) {
             return $this->getLastInsertId();
         } else {
@@ -216,8 +226,13 @@ class Result
     // ROWS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function rows($rows = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($rows)) {
             return $this->getRows();
         } else {
@@ -256,7 +271,7 @@ class Result
                 }
             }
 
-            $row = $this->wye()->makeRow($row);
+            $row = $this->getWye()->makeRow($row);
         }
 
         $this->rows[] = $row;
@@ -284,7 +299,7 @@ class Result
      */
     public function attach()
     {
-        $this->wye()->addResult($this);
+        $this->getWye()->addResult($this);
         return $this;
     }
 

@@ -77,9 +77,9 @@ class PDOStatement extends BasePDOStatement
      */
     public function __construct(Wye $wye, $statement, $options)
     {
-        $this->wye($wye);
-        $this->statement($statement);
-        $this->options($options);
+        $this->setWye($wye);
+        $this->setStatement($statement);
+        $this->setOptions($options);
 
         $this->bindings = $this->wye->makeBindingCollection();
     }
@@ -121,7 +121,7 @@ class PDOStatement extends BasePDOStatement
      */
     public function execute($params = null)
     {
-        $this->wye()->executeStatement($this, $params);
+        $this->getWye()->executeStatement($this, $params);
         return true;
     }
 
@@ -140,14 +140,14 @@ class PDOStatement extends BasePDOStatement
     public function fetch($how = null, $orientation = null, $offset = null)
     {
         if (is_null($how)) {
-            $defaults = $this->fetchMode();
+            $defaults = $this->getFetchMode();
 
             $how = $defaults[0];
             $orientation = !empty($defaults[1]) ? $defaults[1] : null;
             $offset = !empty($defaults[2]) ? $defaults[2] : null;
         }
 
-        return $this->result()->fetch($how, $orientation, $offset);
+        return $this->getResult()->fetch($how, $orientation, $offset);
     }
 
 
@@ -163,14 +163,14 @@ class PDOStatement extends BasePDOStatement
     public function fetchAll($how = null, $class_name = null, $ctor_args = null)
     {
         if (is_null($how)) {
-            $defaults = $this->fetchMode();
+            $defaults = $this->getFetchMode();
 
             $how = $defaults[0];
             $class_name = !empty($defaults[1]) ? $defaults[1] : null;
             $ctor_args = !empty($defaults[2]) ? $defaults[2] : null;
         }
 
-        return $this->result()->fetchAll($how, $class_name, $ctor_args);
+        return $this->getResult()->fetchAll($how, $class_name, $ctor_args);
     }
 
 
@@ -279,8 +279,13 @@ class PDOStatement extends BasePDOStatement
     // STATEMENT
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function statement($statement = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($statement)) {
             return $this->getStatement();
         } else {
@@ -305,8 +310,13 @@ class PDOStatement extends BasePDOStatement
     // OPTIONS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function options($options = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($options)) {
             return $this->getOptions();
         } else {
@@ -331,8 +341,13 @@ class PDOStatement extends BasePDOStatement
     // RESULT
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function result($result = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($result)) {
             return $this->getResult();
         } else {
@@ -357,8 +372,13 @@ class PDOStatement extends BasePDOStatement
     // FETCH_MODE
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function fetchMode(array $fetch_mode = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($fetch_mode)) {
             return $this->getFetchMode();
         } else {
@@ -376,8 +396,13 @@ class PDOStatement extends BasePDOStatement
     // TRANSACTION
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public function transaction(Transaction $transaction = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($transaction)) {
             return $this->getTransaction();
         } else {

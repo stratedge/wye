@@ -20,6 +20,6 @@ class MakeResultTest extends TestCase
     {
         $result = Wye::makeResult();
 
-        $this->assertInstanceOf(Wye::class, $result->wye());
+        $this->assertInstanceOf(Wye::class, $result->getWye());
     }
 }

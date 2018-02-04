@@ -20,7 +20,7 @@ class MakeRowTest extends TestCase
     {
         $row = Wye::makeRow([]);
 
-        $this->assertInstanceOf(Wye::class, $row->wye());
+        $this->assertInstanceOf(Wye::class, $row->getWye());
     }
 
 
@@ -28,6 +28,6 @@ class MakeRowTest extends TestCase
     {
         $row = Wye::makeRow(["id" => 1, "apparatus" => "Engine 1"]);
 
-        $this->assertSame(["id" => 1, "apparatus" => "Engine 1"], $row->data());
+        $this->assertSame(["id" => 1, "apparatus" => "Engine 1"], $row->getData());
     }
 }

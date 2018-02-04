@@ -20,7 +20,7 @@ class MakeStatementTest extends TestCase
     {
         $statement = Wye::makeStatement("testing", []);
 
-        $this->assertInstanceOf(Wye::class, $statement->wye());
+        $this->assertInstanceOf(Wye::class, $statement->getWye());
     }
 
 
@@ -28,7 +28,7 @@ class MakeStatementTest extends TestCase
     {
         $statement = Wye::makeStatement("SELECT * FROM `users`", []);
 
-        $this->assertSame("SELECT * FROM `users`", $statement->statement());
+        $this->assertSame("SELECT * FROM `users`", $statement->getStatement());
     }
 
 
@@ -36,6 +36,6 @@ class MakeStatementTest extends TestCase
     {
         $statement = Wye::makeStatement("testing", ["key" => "value"]);
 
-        $this->assertSame(["key" => "value"], $statement->options());
+        $this->assertSame(["key" => "value"], $statement->getOptions());
     }
 }

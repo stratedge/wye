@@ -15,7 +15,7 @@ class FetchObjTest extends TestCase
 
         $this->assertInstanceOf(stdClass::class, $row->format(PDO::FETCH_OBJ));
 
-        $row->data(["id" => 1, "apparatus" => "Ladder 7"]);
+        $row->setData(["id" => 1, "apparatus" => "Ladder 7"]);
 
         $this->assertInstanceOf(stdClass::class, $row->format(PDO::FETCH_OBJ));
     }

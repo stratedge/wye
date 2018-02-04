@@ -219,7 +219,7 @@ class Wye
         $result = static::getOrCreateResultAt(static::numQueries());
 
         //Add the result to the statement
-        $statement->result($result);
+        $statement->setResult($result);
 
         //If a transaction is open, add the statement to it
         if (static::inTransaction()) {
@@ -481,8 +481,13 @@ class Wye
     // STATEMENTS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public static function statements($statements = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($statements)) {
             return static::getStatements();
         } else {
@@ -508,11 +513,11 @@ class Wye
     public static function addStatement(PDOStatement $statement)
     {
         //Add statement
-        $statements = static::statements();
+        $statements = static::getStatements();
         $statements[] = $statement;
 
         //Store statements
-        static::statements($statements);
+        static::setStatements($statements);
     }
 
     public static function getLastStatement()
@@ -522,7 +527,7 @@ class Wye
 
     public static function getStatementAtIndex($index = 0)
     {
-        $statements = static::statements();
+        $statements = static::getStatements();
 
         return isset($statements[$index]) ? $statements[$index] : null;
     }
@@ -644,8 +649,13 @@ class Wye
     // QUOTES
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public static function quotes($quotes = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($quotes)) {
             return static::getQuotes();
         } else {
@@ -717,8 +727,13 @@ class Wye
     // TRANSACTIONS
     //**************************************************************************
 
+    /**
+     * @deprecated
+     */
     public static function transactions(array $transactions = null)
     {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated', E_USER_DEPRECATED);
+
         if (is_null($transactions)) {
             return static::getTransactions();
         } else {
@@ -753,11 +768,11 @@ class Wye
 
     public static function currentTransaction()
     {
-        if (empty(static::transactions())) {
+        if (empty(static::getTransactions())) {
             throw new Exception("There are no transactions available.");
         }
 
-        $transactions = static::transactions();
+        $transactions = static::getTransactions();
 
         return end($transactions);
     }

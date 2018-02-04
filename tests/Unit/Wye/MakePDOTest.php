@@ -20,6 +20,6 @@ class MakePDOTest extends TestCase
     {
         $pdo = Wye::makePDO();
 
-        $this->assertInstanceOf(Wye::class, $pdo->wye());
+        $this->assertInstanceOf(Wye::class, $pdo->getWye());
     }
 }

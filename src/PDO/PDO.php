@@ -96,10 +96,10 @@ class PDO extends BasePDO
      */
     public function lastInsertId($name = null)
     {
-        return $this->wye()
+        return $this->getWye()
             ->getLastStatement()
-            ->result()
-            ->lastInsertId();
+            ->getResult()
+            ->getLastInsertId();
     }
 
 
@@ -112,7 +112,7 @@ class PDO extends BasePDO
      */
     public function prepare($statement, $options = null)
     {
-        return $this->wye()->makeStatement($statement, $options);
+        return $this->getWye()->makeStatement($statement, $options);
     }
 
 
@@ -136,7 +136,7 @@ class PDO extends BasePDO
             );
         }
 
-        return $this->wye()->quote($string);
+        return $this->getWye()->quote($string);
     }
 
     /**

@@ -24,7 +24,7 @@ class PrepareTest extends TestCase
 
         $statement = $pdo->prepare("SELECT * FROM `users`");
 
-        $this->assertInstanceOf(Wye::class, $statement->wye());
+        $this->assertInstanceOf(Wye::class, $statement->getWye());
     }
 
 
@@ -34,7 +34,7 @@ class PrepareTest extends TestCase
 
         $statement = $pdo->prepare("SELECT * FROM `users`");
 
-        $this->assertSame("SELECT * FROM `users`", $statement->statement());
+        $this->assertSame("SELECT * FROM `users`", $statement->getStatement());
     }
 
 
@@ -44,6 +44,6 @@ class PrepareTest extends TestCase
 
         $statement = $pdo->prepare("SELECT * FROM `users`", ["test" => true]);
 
-        $this->assertSame(["test" => true], $statement->options());
+        $this->assertSame(["test" => true], $statement->getOptions());
     }
 }
